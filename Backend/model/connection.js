@@ -2,7 +2,7 @@ import mongodb from 'mongodb'
 import config from '../config.js'
 
 const client = new mongodb.MongoClient(`mongodb://${config.db.host}:${config.db.port}`)
-
+  
 /**
  * Se encarga de hacer la conexión con la base de datos.
  * 
@@ -12,7 +12,7 @@ const client = new mongodb.MongoClient(`mongodb://${config.db.host}:${config.db.
 
 export async function connection(callback){
     await client.connect()
-    const result = await callback(client.db(process.env.NODE_MONGO_DB))
+    const result = await callback(client.db(config.db.dbName))
     
     await client.close()
     return result

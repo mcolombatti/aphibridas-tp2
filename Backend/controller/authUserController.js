@@ -27,7 +27,7 @@ const schema = yup.object({
                 res.status(400).json({ error: 400, msg: err.msg})
             }
             else {
-                res.status(500).json({error:500, msg: `Ocurrió un error inesperado ${error}`})
+                res.status(500).json({error:500, msg: `Ocurrió un error inesperado ${err}`})
             }
         })
     })
