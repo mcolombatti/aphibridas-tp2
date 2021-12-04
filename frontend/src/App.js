@@ -3,6 +3,7 @@ import './App.css';
 import {useState, useEffect } from 'react'
 import { Routes, Route, Link, Navigate, useNavigate } from 'react-router-dom';
 import Login from './pages/Login' 
+import Logout from './pages/Logout' 
 import Home from './pages/Home'
 import { useAuth } from './context/Auth.Context'
 
@@ -39,6 +40,13 @@ function App(props) {
       auth.dispatch({ type: 'LOGIN', payload: user })
     }
   }, [])
+  useEffect(() => {
+    if (localStorage.getItem('token') && localStorage.getItem('user')){
+      const token = JSON.parse(localStorage.removeItem('token'))
+      const user = JSON.parse(localStorage.removeItem('user'))
+      auth.dispatch({ type: 'LOGIN', payload: [token, user] })
+    }
+  }, [])
 
   return (
     <div className="App">
@@ -51,6 +59,9 @@ function App(props) {
               </li>
               <li>
                 <Link to="/login">login</Link>
+              </li> 
+              <li>
+                <Link to="/logout">logout</Link>
               </li> 
             </ul>
           </nav>

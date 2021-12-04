@@ -14,4 +14,4 @@ export async function login(email, password){
             throw new Error('Las credenciales ingresadas no son válidas')
         }
     })
-} 
+}  
