@@ -1,5 +1,5 @@
 import express from 'express'
-import authUserController from '../controller/authUserController.js'
+import authUserController from '../controller/authUser.controller.js'
 import { validator } from '../middleware/validatorToken.js'
 const route = express.Router()
 

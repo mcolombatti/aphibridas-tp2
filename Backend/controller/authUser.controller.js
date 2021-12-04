@@ -1,6 +1,6 @@
 import * as yup from 'yup'
 import { generate } from '../middleware/validatorToken.js'
-import authenticationDao from "../model/authenticationDao.js"
+import authenticationDao from "../model/authentication.dao.js"
 
 const schema = yup.object({
     email: yup.string().email().required("Es obligatorio ingresar un correo electrónico para registrarse"),

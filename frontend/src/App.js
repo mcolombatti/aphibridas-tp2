@@ -4,6 +4,9 @@ import {useState, useEffect } from 'react'
 import { Routes, Route, Link, Navigate, useNavigate } from 'react-router-dom';
 import Login from './pages/Login' 
 import Logout from './pages/Logout' 
+
+import Products from './pages/Products';
+import Product from './pages/Product';
 import Home from './pages/Home'
 import { useAuth } from './context/Auth.Context'
 
@@ -61,6 +64,9 @@ function App(props) {
                 <Link to="/login">login</Link>
               </li> 
               <li>
+              <Link to="/products">Products</Link>
+            </li>
+              <li>
                 <Link to="/logout">logout</Link>
               </li> 
             </ul>
@@ -70,7 +76,13 @@ function App(props) {
           <Route path="/" element={
           <AuthRoute><Home/></AuthRoute>
         }/>
-          <Route path="/login" element={<Login/>} />
+           <Route path="/login" element={<Login />} />
+        <Route path="/products" element={
+          <AuthRoute><Products /></AuthRoute>
+        } />
+        <Route path="/products/:id" element={<Product />} />
+
+
           <Route path="/logout" element={<Logout/>} />
           <Route path="/404" element={<h1>Sitio no encontrado</h1>}/>
           <Route path="*" element={<Navigate to="/404" />} />

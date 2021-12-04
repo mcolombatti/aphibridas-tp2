@@ -6,5 +6,8 @@ export default {
         host: process.env.NODE_MONGO_HOST || 'localhost',
         port: process.env.NODE_MONGO_PORT || 27017,
         dbName: process.env.NODE_MONGO_DB || 'aplicaciones-hibridas'
+    },
+    middleware: {
+        access: process.env.MW_ACCESS || '123',
     }
 }
