@@ -12,3 +12,9 @@ export function ProductAdd(product) {
         payload: product
     };
 }
+export function ProductsGet(product) {
+    return {
+        type: 'get',
+        payload: product
+    };
+}

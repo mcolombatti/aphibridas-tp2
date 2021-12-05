@@ -2,19 +2,11 @@ import express from 'express'
 import config from '../config.js'
 import empleadosApiController from '../controller/empleadosApi.controller.js'
 import empleadosDao from '../model/empleados.dao.js' 
+import {validator} from '../middleware/validatorToken.js' 
 
 const router = express.Router()
 
-function mw_access(req, res, next){
-    if(req.query.pass === config.middleware.access){
-        next()
-    }
-    else {
-        res.status(401).json({err:401, msg: 'no tiene autorizacion para realizar la acción'})
-    }
-
-}
-
+ 
 router.route("/")
 .get(function (req, res) {
     empleadosDao.findAllEmpleados()
@@ -28,7 +20,7 @@ router.route("/")
       });
     });
   })
-  .post([mw_access],function (req, res) {
+  .post([validator],function (req, res) {
     empleadosApiController.createEmpleado(req.body)
         .then(function (data) {
             res.status(200).json(`se creó satisfactoriamente el empleado`);
@@ -53,7 +45,7 @@ router.route("/")
               });
             });
         })
-  .put([mw_access],function (req, res) { 
+  .put([validator],function (req, res) { 
     empleadosApiController.updateEmpleado(req.params.id, req.body)
         .then(function (data) {
             res.status(200).json(`se actualizó satisfactoriamente el empleado con id: ${req.params.id}`);
@@ -65,7 +57,7 @@ router.route("/")
           });
         });
     })
-    .delete([mw_access],function (req, res) { 
+    .delete([validator],function (req, res) { 
     empleadosApiController.DeleteEmpleado((req.params.id))
         .then(function (data) {
             res.status(200).json(`eliminado el empleado con id: ${req.params.id}`);

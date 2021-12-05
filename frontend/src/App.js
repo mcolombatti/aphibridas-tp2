@@ -5,8 +5,10 @@ import { Routes, Route, Link, Navigate, useNavigate } from 'react-router-dom';
 import Login from './pages/Login' 
 import Logout from './pages/Logout' 
 
-import Products from './pages/Products';
-import Product from './pages/Product';
+import Create from './pages/Create' 
+
+import Empleados from './pages/Empleados';
+import Empleado from './pages/Empleado';
 import Home from './pages/Home'
 import { useAuth } from './context/Auth.Context'
 
@@ -53,40 +55,47 @@ function App(props) {
 
   return (
     <div className="App">
-      <h1>Bienvenido a HR Connect</h1>
-        <NavAuth>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
+    
+        <div className="navbar">
+          <NavAuth>
+            <nav class="links">
+              <ul>
+                <li>
+                  <Link to="/">Home</Link>
+                </li>
+                <li>
+                  <Link to="/login">login</Link>
+                </li>
+                <li>
+                <Link to="/empleados">Empleados</Link>
               </li>
-              <li>
-                <Link to="/login">login</Link>
-              </li> 
-              <li>
-              <Link to="/products">Products</Link>
-            </li>
-              <li>
-                <Link to="/logout">logout</Link>
-              </li> 
-            </ul>
-          </nav>
-        </NavAuth>
-        <Routes>
-          <Route path="/" element={
-          <AuthRoute><Home/></AuthRoute>
-        }/>
-           <Route path="/login" element={<Login />} />
-        <Route path="/products" element={
-          <AuthRoute><Products /></AuthRoute>
-        } />
-        <Route path="/products/:id" element={<Product />} />
-
-
-          <Route path="/logout" element={<Logout/>} />
-          <Route path="/404" element={<h1>Sitio no encontrado</h1>}/>
-          <Route path="*" element={<Navigate to="/404" />} />
-        </Routes>
+                <li>
+                  <Link to="/create">Crear</Link>
+                </li>
+                <li>
+                  <Link to="/logout">logout</Link>
+                </li>
+              </ul>
+            </nav>
+          </NavAuth>
+        </div>
+        <div className="content">
+          <Routes>
+            <Route path="/" element={
+            <AuthRoute><Home/></AuthRoute>
+          }/>
+             <Route path="/login" element={<Login />} />
+          <Route path="/empleados" element={
+            <AuthRoute><Empleados /></AuthRoute>
+          } /><Route path="/create" element={
+            <AuthRoute><Create /></AuthRoute>
+          } />
+          <Route path="/empleado/:id" element={<Empleado />} />
+            <Route path="/logout" element={<Logout/>} />
+            <Route path="/404" element={<h1>Sitio no encontrado</h1>}/>
+            <Route path="*" element={<Navigate to="/404" />} />
+          </Routes>
+        </div>
     </div>
   );
 }
