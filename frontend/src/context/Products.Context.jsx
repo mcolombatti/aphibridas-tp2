@@ -3,8 +3,7 @@ import API from '../api/product.api'
  
 import {   useNavigate  } from 'react-router-dom';
 
-const EmpleadosContext = createContext();
-// action tiene dos valores type y payload
+const EmpleadosContext = createContext(); 
 
 
 export function EmpleadosProvider(props) {
@@ -48,9 +47,18 @@ export function EmpleadosProvider(props) {
                 navigate('/')
               })
     } 
+    const get = async (id) => {
+         
+          
+            return API.getEmpleadoDetails(id)
+            .then(() => {
+                
+                navigate('/')
+              })
+    } 
 
     return (
-                <EmpleadosContext.Provider value={{ empleados, setEmpleados, remove, create }}>
+                <EmpleadosContext.Provider value={{ empleados, setEmpleados, remove, create,get}}>
             {props.children}
         </EmpleadosContext.Provider>
     );

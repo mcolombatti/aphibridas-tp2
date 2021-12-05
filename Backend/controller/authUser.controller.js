@@ -4,8 +4,12 @@ import authenticationDao from "../model/authentication.dao.js"
 
 const schema = yup.object({
     email: yup.string().email().required("Es obligatorio ingresar un correo electrónico para registrarse"),
-    password: yup.string().min(8).required("El password no cumple con los requisitos minimos. Debe tener al menos 8 caracteres"),
+    password: yup.string().min(8).required("Es obligatorio ingresar un password para registrarse"),
     name: yup.string().required("El nombre es obligatorio")
+}).noUnknown()
+const schemaLogin = yup.object({
+    email: yup.string().email().required("Es obligatorio ingresar un correo electrónico para loguearse"),
+    password: yup.string().required("Es obligatorio ingresar un password para loguearse"),
 }).noUnknown()
 
 /**
@@ -44,7 +48,8 @@ const schema = yup.object({
  */
 
 export function login(req, res){
-
+    schemaLogin.validate(req.body) 
+    .then(function (data){
     authenticationDao.login(req.body.email, req.body.password)
 
     .then(function(data){
@@ -63,6 +68,14 @@ export function login(req, res){
             res.status(500).json({error:500, msg:`Ocurrio un error ${err}`})
         }
     })
+}).catch(function(err){
+    if (err.error){
+        res.status(401).json({error:401, msg: err.msg})
+    }
+    else {
+        res.status(500).json({error:500, msg:`Ocurrio un error ${err}`})
+    }
+})
 }
 
 /**

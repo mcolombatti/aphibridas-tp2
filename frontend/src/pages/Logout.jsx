@@ -15,7 +15,7 @@ function Logout({ onLogout }) {
             dispatch({ type: 'LOGOUT', payload: ['token', 'user'] }) 
         }  
     return (
-        <Container maxWidth="sm">
+        <Container maxWidth="sm"><p>Cerrar la sesión  </p>
             <Button variant="outlined" onClick={(event) => onSubmit(event)}>Logout</Button>
         </Container>
     )

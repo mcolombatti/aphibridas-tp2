@@ -1,9 +1,8 @@
 function Home(props) {
     return (
         <div>
-           
-        <h1>Bienvenido a HR Connect</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, ab vel, repudiandae magnam quam alias voluptatibus quia itaque sapiente qui accusamus quibusdam molestias, in explicabo odio porro ducimus maiores ullam!</p>
+            <h1>HR Connect</h1>
+            <p>En el portal de HR Connect vas a poder ver todos los empleados de tu empresa</p>
         </div>
     )
 }

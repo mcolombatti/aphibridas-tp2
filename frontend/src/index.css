@@ -24,6 +24,12 @@
 .navbar .links {
   margin-left: auto;
 }
+.content div {
+  padding: 0.5em;
+}
+ .css-hip9hq-MuiPaper-root-MuiAppBar-root  {
+  background-color: #fd80a6a4 !important; 
+}
 .navbar li {
   margin-left: 16px;
   text-decoration: none;

@@ -17,7 +17,7 @@ function Login({ onLogin }) {
         API.login(email, password)
         .then(function(data) {
             localStorage.setItem('token', data.token)
-            localStorage.setItem('user', JSON.stringify(data.user))
+            localStorage.setItem('user', JSON.stringify(data.user)) 
             dispatch({ type: 'LOGIN', payload: data.user })
         })
         .catch(function(error){
@@ -25,7 +25,7 @@ function Login({ onLogin }) {
         })
     }
     return (
-        <Container maxWidth="sm">
+        <Container className="login" maxWidth="sm">
             <Box>
                 <FormGroup>
                     <TextField label="E-Mail" value={email} onChange={(event) => { setEmail(event.target.value) }} />

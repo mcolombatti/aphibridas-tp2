@@ -39,7 +39,7 @@ async function login (email, password) {
  * @returns {Promise}
  */
 async function register(user) {
-    return await connection(async function(db) {
+    return connection(async function(db) {
         const oldUser = await db.collection('Users').findOne({ email: user.email})
         if(!oldUser) {
             const salt = await bcrypt.genSalt(10)

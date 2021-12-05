@@ -32,6 +32,17 @@ export async function createEmpleado(empleado) {
     .then(res => res.json())
 }
 
+export async function getEmpleadoDetails(id) {
+    return fetch(`${config.api.url}empleados/${id}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'auth-token': `${localStorage.getItem('token')}`
+        }
+    })
+    .then(res => res.json())
+}
+
 export default {
-    deleteEmpleado, getEmpleados, createEmpleado
+    deleteEmpleado, getEmpleados, createEmpleado, getEmpleadoDetails
 }

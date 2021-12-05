@@ -10,8 +10,8 @@ function EmpleadoListItem(props) {
     return (
         <li  className="blog-preview" >
             {error && <p>{error}</p>}
-            <h2>{props.empleado._id}- {props.empleado.name}</h2>
-            <Link   to={`/empleado/${props.empleado._id}`} >Ver detalles</Link>
+            <h2>DNI: {props.empleado.dni}- {props.empleado.apellido}{props.empleado.name}</h2>
+            <Link empleado={props.empleado}  to={`/empleados/${props.empleado._id}`} >Ver detalles</Link>
             <div className="delete"><button onClick={()=>remove(props.empleado)}>Eliminar</button></div>
         </li>
     )

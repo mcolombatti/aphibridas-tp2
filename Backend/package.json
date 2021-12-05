@@ -6,6 +6,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon main.js",
+    "init": "node init.js",
     "server": "node main.js"
   },
   "author": "",

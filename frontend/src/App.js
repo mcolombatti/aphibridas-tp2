@@ -3,12 +3,17 @@ import './App.css';
 import {useState, useEffect } from 'react'
 import { Routes, Route, Link, Navigate, useNavigate } from 'react-router-dom';
 import Login from './pages/Login' 
-import Logout from './pages/Logout' 
-
-import Create from './pages/Create' 
-
-import Empleados from './pages/Empleados';
-import Empleado from './pages/Empleado';
+import Logout from './pages/Logout'  
+import Create from './pages/Create'  
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import Empleados from './pages/Empleados'; 
+import DetailsEmpleado from './pages/Empleado';
 import Home from './pages/Home'
 import { useAuth } from './context/Auth.Context'
 
@@ -44,53 +49,51 @@ function App(props) {
       const user = JSON.parse(localStorage.getItem('user'))
       auth.dispatch({ type: 'LOGIN', payload: user })
     }
-  }, [])
-  useEffect(() => {
-    if (localStorage.getItem('token') && localStorage.getItem('user')){
-      const token = JSON.parse(localStorage.removeItem('token'))
-      const user = JSON.parse(localStorage.removeItem('user'))
-      auth.dispatch({ type: 'LOGIN', payload: [token, user] })
-    }
-  }, [])
+  }, []) 
 
   return (
     <div className="App">
     
-        <div className="navbar">
+        <div >
           <NavAuth>
-            <nav class="links">
-              <ul>
-                <li>
-                  <Link to="/">Home</Link>
-                </li>
-                <li>
-                  <Link to="/login">login</Link>
-                </li>
-                <li>
-                <Link to="/empleados">Empleados</Link>
-              </li>
-                <li>
-                  <Link to="/create">Crear</Link>
-                </li>
-                <li>
-                  <Link to="/logout">logout</Link>
-                </li>
-              </ul>
-            </nav>
+          <Box sx={{ flexGrow: 1 }} className="links">
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            HR Connect
+          </Typography>
+          <Button color="inherit"> <Link to="/">Home</Link></Button>
+          <Button color="inherit"> <Link to="/login">Login</Link></Button>
+          <Button color="inherit"> <Link to="/empleados">Empleados</Link></Button>
+          <Button color="inherit"><Link to="/create">Crear</Link></Button>
+          <Button color="inherit"> <Link to="/logout">Logout</Link></Button>
+        </Toolbar>
+      </AppBar>
+    </Box>
+          
+            
+            
           </NavAuth>
         </div>
         <div className="content">
           <Routes>
-            <Route path="/" element={
-            <AuthRoute><Home/></AuthRoute>
-          }/>
+            <Route path="/" element={<Home/>}/>
              <Route path="/login" element={<Login />} />
           <Route path="/empleados" element={
             <AuthRoute><Empleados /></AuthRoute>
-          } /><Route path="/create" element={
+          } /> <Route path="/create" element={
             <AuthRoute><Create /></AuthRoute>
           } />
-          <Route path="/empleado/:id" element={<Empleado />} />
+          <Route path="/empleados/:id" element={<AuthRoute><DetailsEmpleado /></AuthRoute>} />
             <Route path="/logout" element={<Logout/>} />
             <Route path="/404" element={<h1>Sitio no encontrado</h1>}/>
             <Route path="*" element={<Navigate to="/404" />} />
