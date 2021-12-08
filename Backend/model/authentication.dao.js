@@ -18,7 +18,8 @@ async function login (email, password) {
                 return {
                     id: user._id,
                     name: user.name,
-                    email: user.email
+                    email: user.email,
+                    rol: user.rol
                 }
             }
             else {
@@ -48,6 +49,8 @@ async function register(user) {
             await db.collection('Users').insertOne({
                 name: user.name,
                 email: user.email,
+                
+                rol: user.rol,
                 password: password
             })
         }

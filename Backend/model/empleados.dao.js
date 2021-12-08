@@ -1,14 +1,14 @@
 import mongodb from 'mongodb'
 import { connection } from './connection.js'
 
-export async function findAllEmpleados() {
+export async function viewAllEmpleados() {
     return connection(
         async function (db)  {
             return await db.collection('Empleados').find({}).toArray()
         }
     )
 }
-export async function viewById(id) {
+export async function getById(id) {
     return connection(async function (db) {
         return await db.collection("Empleados").findOne({ _id: mongodb.ObjectId(id) })
     })
@@ -42,17 +42,17 @@ export async function updateEmpleadoById(id, entity) {
  * @param id (int)
  */
 
- export async function deleteEmpleadoById(id){
+ export async function deleteById(id){
     return connection(async function(db){
         return await db.collection("Empleados").deleteOne({_id: mongodb.ObjectId(id)}) // hace un delete del testimonio con el id que le pase por query
     }) 
 }  
 
 export default {
-    findAllEmpleados,
+    viewAllEmpleados,
     insertEmpleado, 
-    deleteEmpleadoById,
-    updateEmpleadoById,viewById
+    deleteById,
+    updateEmpleadoById,getById
 }
 
 

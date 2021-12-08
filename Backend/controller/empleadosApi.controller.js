@@ -1,34 +1,109 @@
 import empleadosDao from '../model/empleados.dao.js' 
   
-  
 
 /**
- * Crea la empresa en la base
- * @param {object} entity 
+ * Busca todos los usuarios de la base de datos 
+ * 
+ * @param req 
+ * @param res 
  */
-export async function createEmpleado(entity) {
-  empleadosDao.insertEmpleado(entity)
-   
+ export async function findAll(req, res){
+  empleadosDao.viewAllEmpleados()
+  .then(function(result){
+      res.json(result)
+  })
+  .catch(function(err){
+      if (err.error){
+          res.status(400).json({ error: 400, msg: err.msg })
+      }
+      else{
+          res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
+      }
+  })
 }
-   /**
-    * Actualiza la Empresa
-    * @param {number} id 
-    * @param {object} entity 
-    */
-export async function updateEmpleado(id, entity) {
-  empleadosDao.updateEmpleadoById(id, entity)
-}
-  
 
 /**
- * Elimina la empresa de la base
- * @param {number} id 
+ * Busca todos los usuarios de la base de datos 
+ * 
+ * @param req 
+ * @param res 
  */
-export async function DeleteEmpleado(id) {
-  empleadosDao.deleteEmpleadoById(id)
-   
+ export async function createEmpleado(req, res){
+  empleadosDao.insertEmpleado(req.body)
+  .then(function(result){
+      res.json(result)
+  })
+  .catch(function(err){
+      if (err.error){
+          res.status(400).json({ error: 400, msg: err.msg })
+      }
+      else{
+          res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
+      }
+  })
 }
+/**
+ * Busca todos los usuarios de la base de datos 
+ * 
+ * @param req 
+ * @param res 
+ */
+ export async function updateEmpleado(req, res){
+  empleadosDao.updateEmpleadoById(req.params.id, req.body)
+  .then(function(result){
+      res.json(result)
+  })
+  .catch(function(err){
+      if (err.error){
+          res.status(400).json({ error: 400, msg: err.msg })
+      }
+      else{
+          res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
+      }
+  })
+}
+/**
+ * Busca todos los usuarios de la base de datos 
+ * 
+ * @param req 
+ * @param res 
+ */
+ export async function getEmpleado(req, res){
+  empleadosDao.getById(req.params.id,)
+  .then(function(result){
+      res.json(result)
+  })
+  .catch(function(err){
+      if (err.error){
+          res.status(400).json({ error: 400, msg: err.msg })
+      }
+      else{
+          res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
+      }
+  })
+}
+/**
+ * Busca todos los usuarios de la base de datos 
+ * 
+ * @param req 
+ * @param res 
+ */
+ export async function deleteEmpleado(req, res){
+  empleadosDao.deleteById(req.params.id)
+  .then(function(result){
+      res.json(result)
+  })
+  .catch(function(err){
+      if (err.error){
+          res.status(400).json({ error: 400, msg: err.msg })
+      }
+      else{
+          res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
+      }
+  })
+}
+  
   
 export default { 
-  createEmpleado, updateEmpleado, DeleteEmpleado
+      createEmpleado, updateEmpleado, deleteEmpleado,findAll,getEmpleado
 };
