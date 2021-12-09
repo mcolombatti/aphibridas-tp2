@@ -29,8 +29,19 @@ export async function createEmpleado(empleado) {
         },
         body: JSON.stringify(empleado)
     })
-    .then(res => res.json())
-}
+    .then(function(res){
+        res.json({ msg: "Usuario registrado satisfactoriamente"})
+    })
+    .catch(function (res, err){
+        if (err.error){
+            res.status(400).json({ error: 400, msg: err.msg})
+            console.log(err.error)
+        }
+        else {
+            res.status(500).json({error:500, msg: `Ocurrió un error inesperado ${err}`})
+        }
+    })
+}  
 
 export async function getEmpleadoDetails(id) {
     return fetch(`${config.api.url}empleados/${id}`, {
