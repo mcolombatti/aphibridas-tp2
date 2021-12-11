@@ -48,10 +48,15 @@ export async function updateEmpleadoById(id, entity) {
     }) 
 }  
 
+export async function patch(id, entity){
+    return connection(async function(db){
+        return await db.collection("Empleados").updateOne({_id: mongodb.ObjectId(id)},{$push:{"capacitacion": entity}})   
+    }) 
+}
 export default {
     viewAllEmpleados,
     insertEmpleado, 
-    deleteById,
+    deleteById,patch,
     updateEmpleadoById,getById
 }
 

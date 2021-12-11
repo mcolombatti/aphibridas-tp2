@@ -5,6 +5,7 @@ import { Routes, Route, Link, Navigate, useNavigate } from 'react-router-dom';
 import Login from './pages/Login' 
 import Logout from './pages/Logout'  
 import Create from './pages/Create'  
+import AssignCapacitacion from './pages/AssignCapacitacion'  
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -94,6 +95,7 @@ function App(props) {
             <AuthRoute><Create /></AuthRoute>
           } />
           <Route path="/empleados/:id" element={<AuthRoute><DetailsEmpleado /></AuthRoute>} />
+          <Route path="/empleados/assign/:id" element={<AuthRoute><AssignCapacitacion /></AuthRoute>} />
             <Route path="/logout" element={<Logout/>} />
             <Route path="/404" element={<h1>Sitio no encontrado</h1>}/>
             <Route path="*" element={<Navigate to="/404" />} />

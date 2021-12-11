@@ -121,6 +121,27 @@ const schema = yup.object({
 }
   
   
+     /*
+ *
+ * Busca todos los usuarios de la base de datos 
+ * 
+ * @param req 
+ * @param res 
+ */
+ export async function assignCapacitacion(req, res){
+    empleadosDao.patch(req.params.id, req.body)
+    .then(function(result){
+        res.json(result)
+    })
+    .catch(function(err){
+        if (err.error){
+            res.status(400).json({ error: 400, msg: err.msg })
+        }
+        else{
+            res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
+        }
+    })
+  }
 export default { 
-      createEmpleado, updateEmpleado, deleteEmpleado,findAll,getEmpleado
+      createEmpleado, updateEmpleado, deleteEmpleado,findAll,getEmpleado,assignCapacitacion
 };

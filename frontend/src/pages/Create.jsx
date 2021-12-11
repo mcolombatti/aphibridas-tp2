@@ -14,29 +14,85 @@ const [calle, setCalle] = useState('');
 const [altura, setAltura] = useState('');
 const [fechanac, setFechanac] = useState('');
 const [titleError, setTitleError] = useState(false)
-const [titleErrorDetail, setTitleErrorDetail] = useState('')
+const [titleApellidoErrorDetail, setApellidoErrorDetail] = useState('')
+const [titleNameErrorDetail, setNameErrorDetail] = useState('')
+const [titleDniErrorDetail, setDniErrorDetail] = useState('')
+const [titleEmailErrorDetail, setEmailErrorDetail] = useState('')
   
 const empleado = { name, dni, email, calle, altura, fechanac, apellido };
 
 const onSubmit = e => {
     e.preventDefault();
-   
+   if(!titleError){
       create(empleado) 
-    
+    }
   }
-const onChange = e => {
+const onChangeNombre = e => {
     e.preventDefault();
+   
     setName(e.target.value)
     setTitleError(false)
     if (name == '') {
         setTitleError(true)
-        setTitleErrorDetail('el nombre es obligatorio')
+        setNameErrorDetail('el nombre es obligatorio')
       } 
     if (name.length < 3) {
         setTitleError(true)
         
-        setTitleErrorDetail('el nombre debe tener al menos 3 caracteres')
+        setNameErrorDetail('el nombre debe tener al menos 3 caracteres')
       }   
+    
+  }
+const onChangeApellido = e => {
+    e.preventDefault();
+   
+    setApellido(e.target.value)
+    setTitleError(false)
+    if (apellido == '') {
+        setTitleError(true)
+        setApellidoErrorDetail(`el apellido es obligatorio`)
+      } 
+    if (apellido.length < 3) {
+        setTitleError(true)
+        
+        setApellidoErrorDetail(`el apellido debe tener al menos 3 caracteres`)
+      }   
+    
+  }
+const onChangeDni = e => {
+    e.preventDefault();
+   
+    setDni(e.target.value)
+    setTitleError(false)
+    if (dni == '') {
+        setTitleError(true)
+        setDniErrorDetail(`el dni es obligatorio`)
+      } 
+    if (dni.length < 6) {
+        setTitleError(true)
+        
+        setDniErrorDetail(`el dni debe tener al menos 6 caracteres`)
+      }   
+
+      const reg = new RegExp('^[0-9]*$');
+
+      if (reg.test(dni)==false) {
+      setTitleError(true)
+        
+        setDniErrorDetail(`el dni deben ser numeros`)
+}  
+    
+  }
+const onChangeEmail = e => {
+    e.preventDefault();
+   
+    setEmail(e.target.value)
+    setTitleError(false)
+    if (email == '') {
+        setTitleError(true)
+        setEmailErrorDetail(`el email es obligatorio`)
+      }  
+  
     
   }
 return (
@@ -46,7 +102,7 @@ return (
     <form noValidate autoComplete="off" onSubmit={onSubmit}>
      
     <TextField  
-         onChange={(e)=> onChange(e)}
+         onChange={(e)=> onChangeNombre(e)}
           label="Nombre del Empleado" 
           
           color="secondary" 
@@ -57,26 +113,51 @@ return (
           error={titleError}
         />
           {titleError && (
-                    <p className="help is-danger">{titleErrorDetail}</p>
+                    <p className="help is-danger">{titleNameErrorDetail}</p>
                   )} 
-        {/*<label htmlFor="apellido">Apellido del Empleado:</label>
-        <input type="text" value={apellido}  required value={apellido} onChange={(e)=> setApellido(e.target.value)}
+         <TextField  
+         onChange={(e)=> onChangeApellido(e)}
+          label="Apellido del Empleado" 
+          
+          color="secondary" 
+          type="text"
+          required value={apellido}
+          fullWidth
+          required
+          error={titleError}
         />
-        <label htmlFor="dni">DNI:</label>
-        <input required type="number" value={dni} onChange={(e)=> setDni(e.target.value)}
-        ></input>
-        <label htmlFor="email">Email:</label>
-        <input type="email" value={email}  required value={email} onChange={(e)=> setEmail(e.target.value)}
-        ></input>
-        <label htmlFor="calle">Calle:</label>
-        <input  type="text" value={calle}  required value={calle} onChange={(e)=> setCalle(e.target.value)}
-        ></input>
-        <label htmlFor="altura">Altura:</label>
-        <input  type="text" value={altura}  required value={altura}  onChange={(e)=> setAltura(e.target.value)}
-        ></input>
-        <label htmlFor="fechanac">Fecha Nacimiento:</label>
-        <input type="date" value={fechanac}  required value={fechanac}  onChange={(e)=> setFechanac(e.target.value)}
-          ></input>*/}
+          {titleError && (
+                    <p className="help is-danger">{titleApellidoErrorDetail}</p>
+                  )}  
+          <TextField  
+         onChange={(e)=> onChangeDni(e)}
+          label="Dni del Empleado" 
+          
+          color="secondary"  
+          required value={dni}
+          fullWidth
+          required
+          error={titleError}
+        />
+          {titleError && (
+                    <p className="help is-danger">{titleDniErrorDetail}</p>
+                  )} 
+       <TextField  
+         onChange={(e)=> onChangeEmail(e)}
+          label="Email del Empleado" 
+          
+          color="secondary"  
+          required value={email}
+          fullWidth
+          required
+          error={titleError}
+        />
+          {titleError && (
+                    <p className="help is-danger">{titleEmailErrorDetail}</p>
+                  )} 
+      
+ 
+         
  <Button
           type="submit" 
           color="secondary" 

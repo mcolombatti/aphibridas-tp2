@@ -85,27 +85,6 @@ import capacitacionesDao from '../model/capacitaciones.dao.js'
       }
   })
 }
-     /*
- *
- * Busca todos los usuarios de la base de datos 
- * 
- * @param req 
- * @param res 
- */
- export async function patchCapacitacion(req, res){
-  capacitacionesDao.patch(req.params.id, req.body)
-  .then(function(result){
-      res.json(result)
-  })
-  .catch(function(err){
-      if (err.error){
-          res.status(400).json({ error: 400, msg: err.msg })
-      }
-      else{
-          res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
-      }
-  })
-}
        
      /*
  *
@@ -130,5 +109,5 @@ import capacitacionesDao from '../model/capacitaciones.dao.js'
 }   
   
 export default { 
-      createCapacitacion, updateCapacitacion, deleteCapacitacion,findAllCapacitaciones,getCapacitacion,patchCapacitacion
+      createCapacitacion, updateCapacitacion, deleteCapacitacion,findAllCapacitaciones,getCapacitacion
 };

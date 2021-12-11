@@ -53,7 +53,18 @@ export async function getEmpleadoDetails(id) {
     })
     .then(res => res.json())
 }
+export async function assignCapacitacionEmpleado(id, capacitacion) {
+    return fetch(`${config.api.url}empleados/assignation/${id}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'auth-token': `${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify(capacitacion)
+    })
+    .then(res => res.json())
+}
 
 export default {
-    deleteEmpleado, getEmpleados, createEmpleado, getEmpleadoDetails
+    deleteEmpleado, getEmpleados, createEmpleado, getEmpleadoDetails, assignCapacitacionEmpleado
 }

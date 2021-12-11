@@ -46,19 +46,44 @@ export function EmpleadosProvider(props) {
                 
                 navigate('/')
               })
-    } 
-    const get = async (id) => {
-         
-          
-            return API.getEmpleadoDetails(id)
+    }  
+
+    
+const useFetch = async (id) => {
+    const [data, setData] = useState(null);  
+  
+    useEffect(() => {
+    
+        fetch(`http://localhost:9001/api/empleados/${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'auth-token': `${localStorage.getItem('token')}`
+            }
+        })
+        .then(res => {
+          return res.json();
+        })
+        .then(data => {
+            setData(data);
+        })
+        
+     }
+        
+       , []);
+  
+    return { data  };
+  }  
+const assign = async (id, capacitacion) => {
+    return API.assignCapacitacionEmpleado(id, capacitacion)
             .then(() => {
                 
                 navigate('/')
               })
-    } 
-
+   
+  }
     return (
-                <EmpleadosContext.Provider value={{ empleados, setEmpleados, remove, create,get}}>
+                <EmpleadosContext.Provider value={{ empleados, setEmpleados, remove, create, useFetch, assign}}>
             {props.children}
         </EmpleadosContext.Provider>
     );

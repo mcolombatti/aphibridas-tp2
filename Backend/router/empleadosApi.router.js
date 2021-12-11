@@ -11,6 +11,8 @@ route.get('/', [admin_validator],empleadosApiController.findAll)
  .post('/', [admin_validator], empleadosApiController.createEmpleado)
  route.put('/:id', [admin_validator], empleadosApiController.updateEmpleado)
  route.get('/:id', [validator],  empleadosApiController.getEmpleado)
+ 
+ route.patch('/assignation/:id',[admin_validator], empleadosApiController.assignCapacitacion)
  route.delete('/:id',[admin_validator], empleadosApiController.deleteEmpleado)
   
   

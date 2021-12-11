@@ -11,7 +11,6 @@ const route = express.Router()
 route.get('/', [admin_validator],capacitacionesApiController.findAllCapacitaciones)
  .post('/', [admin_validator], capacitacionesApiController.createCapacitacion)
  route.put('/:id', [admin_validator], capacitacionesApiController.updateCapacitacion)
- .patch('/assignation/:id',[admin_validator], capacitacionesApiController.patchCapacitacion)
  .get('/:id', [admin_validator],  capacitacionesApiController.getCapacitacion)
  .delete('/:id',[admin_validator], capacitacionesApiController.deleteCapacitacion)
   

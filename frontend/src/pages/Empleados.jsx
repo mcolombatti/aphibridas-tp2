@@ -12,6 +12,8 @@ function EmpleadoListItem(props) {
             {error && <p>{error}</p>}
             <h2>DNI: {props.empleado.dni}- {props.empleado.apellido}{props.empleado.name}</h2>
             <Link empleado={props.empleado}  to={`/empleados/${props.empleado._id}`} >Ver detalles</Link>
+             <hr />
+           <Link empleado={props.empleado}  to={`/empleados/assign/${props.empleado._id}`} >Asignar capacitacion</Link>
             <div className="delete"><button onClick={()=>remove(props.empleado)}>Eliminar</button></div>
         </li>
     )
