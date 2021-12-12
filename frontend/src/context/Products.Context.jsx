@@ -32,6 +32,7 @@ export function EmpleadosProvider(props) {
        , []);
     
     const remove = async (empleado) => {
+        
         setEmpleados(empleados.filter(p => p._id !== empleado._id))
         return API.deleteEmpleado(empleado._id)
         .catch(() => {   

@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 import { useEmpleados, EmpleadosProvider } from '../context/Products.Context'; 
 import Empleado from './Empleado';
 
+import Eliminar from './Eliminar';
+
 function EmpleadoListItem(props) {
-    const { empleados, remove } = useEmpleados();
+    const { empleados} = useEmpleados();
     const [error, setError] = useState('');
  
     return (
@@ -12,10 +14,8 @@ function EmpleadoListItem(props) {
             {error && <p>{error}</p>}
             <h2>DNI: {props.empleado.dni}- {props.empleado.apellido}{props.empleado.name}</h2>
             <Link empleado={props.empleado}  to={`/empleados/${props.empleado._id}`} >Ver detalles</Link>
-             <hr />
            <Link empleado={props.empleado}  to={`/empleados/assign/${props.empleado._id}`} >Asignar capacitacion</Link>
-            <div className="delete"><button onClick={()=>remove(props.empleado)}>Eliminar</button></div>
-        </li>
+           <Eliminar empleado={props.empleado}/>  </li>
     )
 }
 

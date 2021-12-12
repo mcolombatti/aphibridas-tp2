@@ -28,7 +28,12 @@
   padding: 0.5em;
 }
  .css-hip9hq-MuiPaper-root-MuiAppBar-root  {
-  background-color: #fd80a6a4 !important; 
+  background-color: #f1356d !important; 
+ 
+}
+ .css-hip9hq-MuiPaper-root-MuiAppBar-root a {
+ color:white !important; 
+ 
 }
 .navbar li {
   margin-left: 16px;
@@ -110,12 +115,4 @@
   border-radius: 8px;
   cursor: pointer;
 }
-
-.delete button {
-   
-  background-color: #fff;
-  border:1px solid #f1356d;
-  padding: 8px;
-  border-radius: 8px;
-  cursor: pointer;
-}
+ 

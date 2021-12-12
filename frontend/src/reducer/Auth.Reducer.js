@@ -14,6 +14,12 @@ export function AuthReducer(state, action) {
                 isAuthenticated: false,
                 user: null
             } 
+        case 'REGISTER':
+            return {
+                ...state,
+                isAuthenticated: false,
+                user: null
+            } 
     
         default:
             return state;

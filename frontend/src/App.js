@@ -3,6 +3,7 @@ import './App.css';
 import {useState, useEffect } from 'react'
 import { Routes, Route, Link, Navigate, useNavigate } from 'react-router-dom';
 import Login from './pages/Login' 
+import Register from './pages/Register' 
 import Logout from './pages/Logout'  
 import Create from './pages/Create'  
 import AssignCapacitacion from './pages/AssignCapacitacion'  
@@ -21,11 +22,25 @@ import { useAuth } from './context/Auth.Context'
 function AuthRoute({ children }) {
   const { state } = useAuth()
   return state.isAuthenticated ? children : <Navigate to="/login" />
+} 
+
+function AuthRole({ children }) {
+  const { state } = useAuth()
+  return (state.user.rol == 'admin') ?   children    : <Navigate to="/login" />
 }
 
 function NavAuth({ children }) {
   const { state } = useAuth()
   return state.isAuthenticated ? children : null
+}
+function NoNavAuth({ children }) {
+  const { state } = useAuth()
+  return state.isAuthenticated ?   null : children
+}
+
+function NavRole({ children }) {
+  const { state } = useAuth()
+  return (state.user.rol == 'admin') ?   children : null
 }
 
 
@@ -37,11 +52,11 @@ function App(props) {
   let navigate = useNavigate();
   
   useEffect(() => {
-    if (auth.state.isAuthenticated) {
-      navigate('/')
+    if (!auth.state.isAuthenticated) {
+      navigate('/login')
     }
     else {
-      navigate('/login')
+      navigate('/')
     }
   }, [auth.state])
 
@@ -56,7 +71,7 @@ function App(props) {
     <div className="App">
     
         <div >
-          <NavAuth>
+         
           <Box sx={{ flexGrow: 1 }} className="links">
       <AppBar position="static">
         <Toolbar>
@@ -72,25 +87,31 @@ function App(props) {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             HR Connect
           </Typography>
+          <NoNavAuth>
           <Button color="inherit"> <Link to="/">Home</Link></Button>
+          <Button color="inherit"> <  Link to="/registrarse">Registrarse</Link></Button>
           <Button color="inherit"> <Link to="/login">Login</Link></Button>
-          <Button color="inherit"> <Link to="/empleados">Empleados</Link></Button>
-          <Button color="inherit"><Link to="/create">Crear</Link></Button>
+          </NoNavAuth>
+          <NavAuth>
+         <NavRole> <Button color="inherit"> <Link to="/empleados">Empleados</Link></Button></NavRole>   
+         <NavRole> <Button color="inherit"><Link to="/create">Crear</Link></Button></NavRole> 
           <Button color="inherit"> <Link to="/logout">Logout</Link></Button>
+          </NavAuth>
         </Toolbar>
       </AppBar>
     </Box>
           
             
             
-          </NavAuth>
+         
         </div>
         <div className="content">
           <Routes>
             <Route path="/" element={<Home/>}/>
              <Route path="/login" element={<Login />} />
+             <Route path="/registrarse" element={<Register />} />
           <Route path="/empleados" element={
-            <AuthRoute><Empleados /></AuthRoute>
+            <AuthRoute> <AuthRole><Empleados /></AuthRole></AuthRoute>
           } /> <Route path="/create" element={
             <AuthRoute><Create /></AuthRoute>
           } />
