@@ -93,7 +93,7 @@ const assign = async (id, capacitacion) => {
 export function useEmpleados() {
     const context = useContext(EmpleadosContext);
     if (context === undefined) {
-        throw new Error("useProducts must be used within a ProductsProvider");
+        throw new Error("useEmpleados must be used within a EmpleadosProvider");
     }
     return context;
 }

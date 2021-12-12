@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { useEmpleados, EmpleadosProvider } from '../context/Products.Context'; 
+import { useEmpleados, EmpleadosProvider } from '../context/Empleados.Context'; 
 import TextField from '@mui/material/TextField';
 import {useParams} from 'react-router-dom' 
 import { Button } from '@mui/material';  
 import { useForm } from "react-hook-form";
+import SendIcon from '@mui/icons-material/Send';
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
@@ -65,13 +66,13 @@ return (
              </div>
         </div>
          
- <Button
+        <Button
           type="submit" 
           color="secondary" 
           variant="contained"  
-          
+          endIcon={<SendIcon />}
           >
-          Submit
+          Confirmar
         </Button>
         
      

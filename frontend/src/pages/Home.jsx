@@ -1,4 +1,13 @@
-function Home(props) {
+
+import { useAuth } from '../context/Auth.Context'
+
+import {useState, useEffect } from 'react'
+
+function Home(props){
+    console.log( props.userName )
+
+}
+function HomeD(props) {
     return (
         <div>
             <h1>HR Connect</h1>
@@ -6,4 +15,4 @@ function Home(props) {
         </div>
     )
 }
-export default Home;
+export default HomeD;

@@ -6,7 +6,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-import { useEmpleados, EmpleadosProvider } from '../context/Products.Context';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { useEmpleados, EmpleadosProvider } from '../context/Empleados.Context';
 export default function AlertDialog(props) {
   const [open, setOpen] = React.useState(false);
 
@@ -27,7 +28,7 @@ export default function AlertDialog(props) {
 
   return (
     <div>
-      <Button variant="outlined" color="error" onClick={handleClickOpen}>
+      <Button startIcon={<DeleteIcon />} variant="outlined" color="error" onClick={handleClickOpen}>
         Eliminar
       </Button>
       <Dialog
