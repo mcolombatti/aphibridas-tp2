@@ -32,7 +32,6 @@ export function EmpleadosProvider(props) {
        , []);
     
     const remove = async (empleado) => {
-        
         setEmpleados(empleados.filter(p => p._id !== empleado._id))
         return API.deleteEmpleado(empleado._id)
         .catch(() => {   
@@ -49,32 +48,33 @@ export function EmpleadosProvider(props) {
               })
     }  
 
-    
-const useFetch = async (id) => {
-    const [data, setData] = useState(null);  
-  
-    useEffect(() => {
-    
-        fetch(`http://localhost:9001/api/empleados/${id}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'auth-token': `${localStorage.getItem('token')}`
+      const useIdFetch = Empleadoid => {
+        const [state, setState] = useState({});
+        
+        useEffect(() => {
+          const fetchEmpleado = async () => {
+            try {
+             
+              const empleado = await API.getEmpleadoDetails(Empleadoid);
+            
+              setState({
+                ...empleado,
+                  });
+      
+               } catch (error) {
+             console.log(error)
             }
-        })
-        .then(res => {
-          return res.json();
-        })
-        .then(data => {
-            setData(data);
-        })
-        
-     }
-        
-       , []);
-  
-    return { data  };
-  }  
+          };
+      
+      
+          fetchEmpleado();
+        }, [Empleadoid]);
+      
+       
+      
+        return { state  };
+      };
+       
 const assign = async (id, capacitacion) => {
     return API.assignCapacitacionEmpleado(id, capacitacion)
             .then(() => {
@@ -84,7 +84,7 @@ const assign = async (id, capacitacion) => {
    
   }
     return (
-                <EmpleadosContext.Provider value={{ empleados, setEmpleados, remove, create, useFetch, assign}}>
+                <EmpleadosContext.Provider value={{ empleados, setEmpleados, remove, create, useIdFetch, assign}}>
             {props.children}
         </EmpleadosContext.Provider>
     );

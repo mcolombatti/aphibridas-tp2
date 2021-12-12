@@ -12,9 +12,11 @@ function EmpleadoListItem(props) {
     return (
         <li  className="blog-preview" >
             {error && <p>{error}</p>}
-            <h2>DNI: {props.empleado.dni}- {props.empleado.apellido}{props.empleado.name}</h2>
-            <Link empleado={props.empleado}  to={`/empleados/${props.empleado._id}`} >Ver detalles</Link>
-           <Link empleado={props.empleado}  to={`/empleados/assign/${props.empleado._id}`} >Asignar capacitacion</Link>
+            <h2>DNI: {props.empleado.dni} - {props.empleado.apellido} {props.empleado.name}</h2>
+            <div style={{"display": "flex", "color":"", "flexDirection": "column", "flexWrap": "wrap", "justifyContent": "center",   "alignItems": "center"}} >
+                <Link className= "MuiButton-root btn MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-zcbmsk-MuiButtonBase-root-MuiButton-root" empleado={props.empleado} style={{"marginTop": "2em" }} to={`/empleados/${props.empleado._id}`} >Ver detalles</Link>
+                 <Link  className= "MuiButton-root btn MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-zcbmsk-MuiButtonBase-root-MuiButton-root" empleado={props.empleado}  style={{"marginTop": "2em" }}  to={`/empleados/assign/${props.empleado._id}`} >Asignar capacitacion</Link>
+            </div>
            <Eliminar empleado={props.empleado}/>  </li>
     )
 }

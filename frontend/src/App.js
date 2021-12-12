@@ -5,7 +5,8 @@ import { Routes, Route, Link, Navigate, useNavigate } from 'react-router-dom';
 import Login from './pages/Login' 
 import Register from './pages/Register' 
 import Logout from './pages/Logout'  
-import Create from './pages/Create'  
+import Crear from './pages/Crear'  
+import EmpleadoVista from './pages/EmpleadoVista'  
 import AssignCapacitacion from './pages/AssignCapacitacion'  
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -94,8 +95,10 @@ function App(props) {
           </NoNavAuth>
           <NavAuth>
          <NavRole> <Button color="inherit"> <Link to="/empleados">Empleados</Link></Button></NavRole>   
-         <NavRole> <Button color="inherit"><Link to="/create">Crear</Link></Button></NavRole> 
+         <NavRole> <Button color="inherit"><Link to="/crear">Crear</Link></Button></NavRole> 
           <Button color="inherit"> <Link to="/logout">Logout</Link></Button>
+          
+          <Button color="inherit"> <Link to="/empleado/detalles">Detalles</Link></Button>
           </NavAuth>
         </Toolbar>
       </AppBar>
@@ -110,10 +113,11 @@ function App(props) {
             <Route path="/" element={<Home/>}/>
              <Route path="/login" element={<Login />} />
              <Route path="/registrarse" element={<Register />} />
+             <Route path="/empleado/detalles" element={<EmpleadoVista />} />
           <Route path="/empleados" element={
             <AuthRoute> <AuthRole><Empleados /></AuthRole></AuthRoute>
-          } /> <Route path="/create" element={
-            <AuthRoute><Create /></AuthRoute>
+          } /> <Route path="/crear" element={
+            <AuthRoute><Crear /></AuthRoute>
           } />
           <Route path="/empleados/:id" element={<AuthRoute><DetailsEmpleado /></AuthRoute>} />
           <Route path="/empleados/assign/:id" element={<AuthRoute><AssignCapacitacion /></AuthRoute>} />

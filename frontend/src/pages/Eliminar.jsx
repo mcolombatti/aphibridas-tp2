@@ -17,6 +17,11 @@ export default function AlertDialog(props) {
 
   const handleClose = () => {
     setOpen(false);
+    
+  };
+
+  const handleAccept = () => {
+    setOpen(false);
     remove(props.empleado)
   };
 
@@ -32,16 +37,16 @@ export default function AlertDialog(props) {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Use Google's location service?"}
+          {"Estas a punto de eliminar un registro"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-           ¿Estas seguro que deseas eliminar el empleado?
+           ¿Estas seguro que deseas eliminar el registro?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancelar</Button>
-          <Button onClick={handleClose} autoFocus>
+          <Button onClick={handleAccept} autoFocus>
            Confirmar
           </Button>
         </DialogActions>

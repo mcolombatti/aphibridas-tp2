@@ -4,8 +4,8 @@ import { useEmpleados, EmpleadosProvider } from '../context/Products.Context';
  
 const Empleado = () => {
     const { empleados, useIdFetch } = useEmpleados();
-    const { id } = useParams();
-    const { state: empleado} = useIdFetch(id);
+    ;
+    const { state: empleado} = useIdFetch('61b6258a68333ffbdbcaa830');
     return (
             <div>
             

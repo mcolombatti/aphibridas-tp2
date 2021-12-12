@@ -9,7 +9,10 @@
   
   text-decoration: none;
 }
-
+ .is-danger {
+  color: #f14668 !important;
+  border-color: #f14668 !important;
+}
 .navbar {
   padding: 20px;
   display: flex;
@@ -86,28 +89,13 @@
 }
 
 /* create new blog form */
-.create {
-  max-width: 400px;
-  margin: 0 auto;
-  text-align: center;
-}
-.create label {
-  text-align: left;
-  display: block;
-}
+ 
 .create h2 {
   font-size: 20px;
   color: #f1356d;
   margin-bottom: 30px;
-}
-.create input, .create textarea, .create select {
-  width: 100%;
-  padding: 6px 10px;
-  margin: 10px 0; 
-  box-sizing: border-box;
-  display: block;
-}
-.create button {
+} 
+.create button, .btn {
   background: #f1356d;
   color: #fff;
   border: 0;
@@ -116,3 +104,10 @@
   cursor: pointer;
 }
  
+.MuiFormControl-root{
+  margin: .5em 0 !important;
+}
+.formAssign{
+  display: flex;
+  flex-direction: column;
+}
