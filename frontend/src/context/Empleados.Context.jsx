@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import API from '../api/product.api' 
+import API from '../api/empleado.api' 
  
 import {   useNavigate  } from 'react-router-dom';
 
@@ -47,6 +47,15 @@ export function EmpleadosProvider(props) {
                 navigate('/empleados')
               })
     }  
+    const edit = async (id, empleado) => {
+         
+          
+            return API.editEmpleado(id, empleado)
+            .then(() => {
+                
+                navigate('/empleados')
+              })
+    }  
 
       const useIdFetch = Empleadoid => {
         const [state, setState] = useState({});
@@ -73,7 +82,7 @@ export function EmpleadosProvider(props) {
        
       
         return { state  };
-      };
+      }; 
        
 const assign = async (id, capacitacion) => {
     return API.assignCapacitacionEmpleado(id, capacitacion)
@@ -84,7 +93,7 @@ const assign = async (id, capacitacion) => {
    
   }
     return (
-                <EmpleadosContext.Provider value={{ empleados, setEmpleados, remove, create, useIdFetch, assign}}>
+                <EmpleadosContext.Provider value={{ empleados,  edit, setEmpleados, remove, create, useIdFetch, assign}}>
             {props.children}
         </EmpleadosContext.Provider>
     );

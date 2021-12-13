@@ -9,6 +9,14 @@ export async function deleteEmpleado(id) {
         }
     })
     .then(res => res.json())
+    .catch(function (res, err){
+        if (err.error){
+            res.status(400).json({ error: 400, msg: `La información enviada no es correcta. No pudimos eliminar el registro ${err}`}) 
+        }
+        else {
+            res.status(500).json({error:500, msg: `Ocurrió un error inesperado ${err}`})
+        }
+    })
 }
 export async function getEmpleados() {
     return fetch(`${config.api.url}empleados/`, {
@@ -19,6 +27,14 @@ export async function getEmpleados() {
         }
     })
     .then(res => res.json())
+    .catch(function (res, err){
+        if (err.error){
+            res.status(404).json({ error: 400, msg: ` La información solicitada no existe ${err}`}) 
+        }
+        else {
+            res.status(500).json({error:500, msg: `Ocurrió un error inesperado ${err}`})
+        }
+    })
 }
 export async function createEmpleado(empleado) {
     return fetch(`${config.api.url}empleados/`, {
@@ -34,7 +50,7 @@ export async function createEmpleado(empleado) {
     })
     .catch(function (res, err){
         if (err.error){
-            res.status(400).json({ error: 400, msg: err.msg})
+            res.status(400).json({ error: 400, msg: `La información enviada no es correcta. No pudimos crear el registro ${err}`})
             console.log(err.error)
         }
         else {
@@ -52,6 +68,14 @@ export async function getEmpleadoDetails(id) {
         }
     })
     .then(res => res.json())
+    .catch(function (res, err){
+        if (err.error){
+            res.status(404).json({ error: 400, msg: ` La información solicitada no existe ${err}`}) 
+        }
+        else {
+            res.status(500).json({error:500, msg: `Ocurrió un error inesperado ${err}`})
+        }
+    })
 }
 export async function assignCapacitacionEmpleado(id, capacitacion) {
     return fetch(`${config.api.url}empleados/${id}/capacitaciones`, {
@@ -62,7 +86,14 @@ export async function assignCapacitacionEmpleado(id, capacitacion) {
         },
         body: JSON.stringify(capacitacion)
     })
-    .then(res => res.json())
+    .then(function(res){
+        if (res.status === 200) {
+            return res.json()
+        }
+        else {
+            throw new Error('Hubo un error al intentar asignar la capacitación')
+        }
+    })
 }
 
 export async function completarCapacitacion (  id ){
@@ -79,10 +110,28 @@ export async function completarCapacitacion (  id ){
             return res.json()
         }
         else {
-            throw new Error('Las credenciales ingresadas no son válidas')
+            throw new Error('Hubo un error al intentar actualizar la información')
+        }
+    })
+} 
+export async function editEmpleado (  id, empleado ){
+    return fetch( `${config.api.url}empleados/${id}/edit`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'auth-token': `${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify(empleado)
+    })
+    .then(function(res){
+        if (res.status === 200) {
+            return res.json()
+        }
+        else {
+            throw new Error('Hubo un error al intentar editar el usuario')
         }
     })
 } 
 export default {
-    deleteEmpleado, getEmpleados, createEmpleado,completarCapacitacion, getEmpleadoDetails, assignCapacitacionEmpleado
+    deleteEmpleado, editEmpleado, getEmpleados, createEmpleado,completarCapacitacion, getEmpleadoDetails, assignCapacitacionEmpleado
 }

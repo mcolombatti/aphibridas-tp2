@@ -7,7 +7,7 @@ import Register from './pages/Register'
 import Logout from './pages/Logout'  
 import Crear from './pages/Crear'  
 import CapacitacionesEmpleado from './pages/CapacitacionesEmpleado'
-import EmpleadoVista from './pages/EmpleadoVistaUsuario'  
+import EmpleadoEdit from './pages/EmpleadoEdit' 
 import AssignCapacitacion from './pages/AsignarCapacitacion'  
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -18,8 +18,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Empleados from './pages/EmpleadosVistaAdmin'; 
 import DetailsEmpleado from './pages/EmpleadoVistaAdmin'; 
-import Home from './pages/Home'
-import Tabla from './pages/Tabla'
+import Home from './pages/Home' 
 import { useAuth } from './context/Auth.Context'
 import { style } from '@mui/system';
 
@@ -133,9 +132,9 @@ function App(props) {
             <AuthRoute><Crear /></AuthRoute>
           } />
           <Route path="/empleados/:id" element={<AuthRoute><DetailsEmpleado /></AuthRoute>} /> 
+          <Route path="/empleados/:id/edit" component={EmpleadoEdit} element={<AuthRoute><EmpleadoEdit /></AuthRoute>} /> 
           <Route path="/empleados/assign/:id" element={<AuthRoute><AssignCapacitacion /></AuthRoute>} />
-          <Route path="/empleado/detalles" element={<AuthRoute><EmpleadoVista /></AuthRoute>} />
-          <Route path="/empleado/capacitaciones" element={<AuthRoute><CapacitacionesEmpleado /></AuthRoute>} /> 
+            <Route path="/empleado/capacitaciones" element={<AuthRoute><CapacitacionesEmpleado /></AuthRoute>} /> 
             <Route path="/logout" element={<Logout/>} />
             <Route path="/404" element={<h1>Sitio no encontrado</h1>}/>
             <Route path="*" element={<Navigate to="/404" />} />

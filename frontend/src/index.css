@@ -12,6 +12,9 @@
   color: #f14668 !important;
   border-color: #f14668 !important;
 }
+p, li{
+  font-size: 1.3em;
+}
 .navbar {
   padding: 20px;
   display: flex;

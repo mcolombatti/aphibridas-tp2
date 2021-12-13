@@ -54,7 +54,7 @@ return (
           {...register("horas")}
           
           id="outlined-required" required
-          label="Duracion total de la capacitacion (en horas)"onChange={(e)=> setHoras(e.target.value)}
+          label="Duracion total de la capacitacion (en)"onChange={(e)=> setHoras(e.target.value)}
           defaultValue={horas}
           
           
