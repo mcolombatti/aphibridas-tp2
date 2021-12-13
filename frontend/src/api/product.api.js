@@ -65,6 +65,24 @@ export async function assignCapacitacionEmpleado(id, capacitacion) {
     .then(res => res.json())
 }
 
+export async function completarCapacitacion (  id ){
+    return fetch( `${config.api.url}empleados/${id}/capacitaciones/estado`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'auth-token': `${localStorage.getItem('token')}`
+        },
+         
+    })
+    .then(function(res){
+        if (res.status === 200) {
+            return res.json()
+        }
+        else {
+            throw new Error('Las credenciales ingresadas no son válidas')
+        }
+    })
+} 
 export default {
-    deleteEmpleado, getEmpleados, createEmpleado, getEmpleadoDetails, assignCapacitacionEmpleado
+    deleteEmpleado, getEmpleados, createEmpleado,completarCapacitacion, getEmpleadoDetails, assignCapacitacionEmpleado
 }

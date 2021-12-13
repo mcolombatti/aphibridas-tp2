@@ -22,7 +22,8 @@
   border-bottom: 1px solid #f2f2f2;
 }
 .navbar h1 {
-  color: #f1356d;
+  color: #7e57c2
+  ;
 }
 .navbar .links {
   margin-left: auto;
@@ -31,7 +32,8 @@
   padding: 0.5em;
 }
  .css-hip9hq-MuiPaper-root-MuiAppBar-root  {
-  background-color: #f1356d !important; 
+  background-color: #583c87
+  !important; 
  
 }
  .css-hip9hq-MuiPaper-root-MuiAppBar-root a {
@@ -44,10 +46,11 @@
   padding: 6px;
 }
 .navbar a:hover {
-  color: #f1356d;
+  color: #9778ce
+
+
 }
 .content {
-  max-width: 600px;
   margin: 40px auto;
   padding: 20px;
 }
@@ -61,9 +64,19 @@
 .blog-preview:hover {
   box-shadow: 1px 3px 5px rgba(0,0,0,0.1);
 }
+.delete
+{
+  color: #fafafa !important;
+  background-color: #c62828
+  !important
+
+}
 .blog-preview h2 {
   font-size: 20px;
-  color: #f1356d;
+  color: #9778ce
+
+
+  ;
   margin-bottom: 8px;
 }
 .blog-preview a{
@@ -73,23 +86,36 @@
 /* blog details page */
 .blog-details h2 {
   font-size: 20px;
-  color: #f1356d;
+  color: #9778ce
+  ;
   margin-bottom: 10px;
 }
 .blog-details div {
   margin: 20px 0;
 }
 .blog-details button {
-  background: #f1356d;
-  color: #fff;
+  background: #ffc233
+  ;
+  color: #583c87;
   border: 0;
   padding: 8px;
   border-radius: 8px;
   cursor: pointer;
 }
-
+#logo{color:#ffc233}
 /* create new blog form */
  
+.create  {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  margin: 0
+  
+  
+}   
+.calendario{width: 30em;}
+.css-15wwp11-MuiTableHead-root{
+text-align-last: justify;}
 .create h2 {
   font-size: 20px;
   color: #f1356d;
@@ -147,9 +173,11 @@
     border-radius: 4px;
     -webkit-transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    color: #fff;
-    background-color: #f1356d;
+    color: #583c87;
+    background-color: #ffc233;
+
     box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
 }
 .css-zcbmsk-MuiButtonBase-root-MuiButton-root{
-  background-color: #f1356d !important}
+  background-color: #ffc233
+  !important}

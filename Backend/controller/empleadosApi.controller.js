@@ -177,7 +177,25 @@ const schemaPatch = yup.object({
     .catch(function(err){
         res.status(400).json({ error: 400, msg: err.message  })
     }) 
+  } 
+  export async function completeCapacitacion(req, res){ 
+        empleadosDao.StateCapacitacion(req.params.id)
+    .then(function(result){
+        res.json(result)
+    })
+    .catch(function(err){
+        if (err.error){
+            res.status(400).json({ error: 400, msg: err.msg })
+        }
+        else{
+            res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
+        }
+    }) 
+    
+    .catch(function(err){
+        res.status(400).json({ error: 400, msg: err.message  })
+    }) 
   }
 export default { 
-      createEmpleado, updateEmpleado, deleteEmpleado,findAll,getEmpleado,assignCapacitacion,getEmpleadoByQuery
+      createEmpleado, updateEmpleado, deleteEmpleado,findAll,getEmpleado,assignCapacitacion,completeCapacitacion,getEmpleadoByQuery
 };

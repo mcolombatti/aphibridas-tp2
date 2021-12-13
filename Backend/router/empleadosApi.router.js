@@ -15,6 +15,7 @@ route.get('/query',  empleadosApiController.getEmpleadoByQuery)
  route.put('/:id', [admin_validator], empleadosApiController.updateEmpleado)
  route.get('/:id', [validator],  empleadosApiController.getEmpleado)
  route.patch('/:id/capacitaciones',[admin_validator], empleadosApiController.assignCapacitacion)
+ route.patch('/:id/capacitaciones/estado',[validator], empleadosApiController.completeCapacitacion)
  route.delete('/:id',[admin_validator], empleadosApiController.deleteEmpleado)
   
   

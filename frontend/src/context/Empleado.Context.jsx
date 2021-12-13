@@ -9,9 +9,10 @@ const EmpleadoContext = createContext();
 export function EmpleadoProvider(props) {
     const [empleado, setEmpleado] = useState()
      
+  let navigate = useNavigate();
  
 
-      const useIdFetch = Empleadoid => {
+      const useIdFetch = (Empleadoid) => {
         const [state, setState] = useState({});
         
         useEffect(() => {
@@ -38,8 +39,18 @@ export function EmpleadoProvider(props) {
         return { state  };
       };
        
+      const completar = async (id ) => {
+         
+          
+        return API.completarCapacitacion(id )
+        .then(() => {
+                
+          navigate('/')
+        })
+}  
+       
     return (
-                <EmpleadoContext.Provider value={{ empleado, setEmpleado,  useIdFetch}}>
+                <EmpleadoContext.Provider value={{ empleado, setEmpleado, completar, useIdFetch}}>
             {props.children}
         </EmpleadoContext.Provider>
     );

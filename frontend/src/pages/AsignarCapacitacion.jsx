@@ -10,9 +10,10 @@ import * as yup from "yup";
 
 const schema = yup.object().shape({
   name: yup.string().required('El titulo de la capacitacion es obligatorio').min(3),  
-  fechainicio: yup.date('la fecha de inicio tiene que ser una fecha'),
+  fechainicio: yup.date().typeError('La fecha de nacimiento debe estar en formato fecha') ,
 
-  horas: yup.number('las horas debe estar compuesto por numeros unicamente').required(),
+  horas: yup.number().required()
+  .typeError('La duración debe estar compuesta por numeros unicamente')
 }); 
 
 function Assign() {
@@ -41,7 +42,7 @@ return (
           {...register("name")}
           
           id="outlined-required" required
-          label="titulo de la capacitacion"onChange={(e)=> setName(e.target.value)}
+          label="Título de la capacitacion"onChange={(e)=> setName(e.target.value)}
           defaultValue={name}
 />
                             <p className="is-danger">{errors.name?.message}</p> 
@@ -53,17 +54,20 @@ return (
           {...register("horas")}
           
           id="outlined-required" required
-          label="Duracion total de la capacitacion"onChange={(e)=> setHoras(e.target.value)}
+          label="Duracion total de la capacitacion (en horas)"onChange={(e)=> setHoras(e.target.value)}
           defaultValue={horas}
           
           
-        />     <div className='MuiFormControl-root MuiTextField-root css-1u3bzj6-MuiFormControl-root-MuiTextField-root'>
+        /> 
+         <p className="is-danger">{errors.horas?.message}</p>
+            <div className='calendario MuiFormControl-root MuiTextField-root css-1u3bzj6-MuiFormControl-root-MuiTextField-root'>
              <div className='MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root'>
                
-                         <label className='MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline' htmlFor="fechainicio">Fecha Inicio del Curso</label>
+                         <label className=' MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline' htmlFor="fechainicio">Fecha Inicio de la capacitación</label>
                          <input className='MuiOutlinedInput-input MuiInputBase-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input' {...register("fechainicio")} type="date" value={fechainicio}  required onChange={(e)=> setFechaInicio(e.target.value)}/>
-                           <p>{errors.fechainicio?.message}</p>
+                          
              </div>
+             <p className="is-danger">{errors.fechainicio?.message}</p>
         </div>
          
         <Button

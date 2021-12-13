@@ -44,7 +44,7 @@ export function EmpleadosProvider(props) {
             return API.createEmpleado(empleado)
             .then(() => {
                 
-                navigate('/')
+                navigate('/empleados')
               })
     }  
 

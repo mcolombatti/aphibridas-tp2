@@ -57,10 +57,10 @@ export async function updateEmpleadoById(id, entity) {
 
 export async function patch(id, entity){
     return connection(async function(db){
-        return await db.collection("Empleados").updateOne({_id: mongodb.ObjectId(id)},{$push:{"capacitacion": entity,"finalizado": false}})   
+        return await db.collection("Empleados").updateOne({_id: mongodb.ObjectId(id)},{$push:{"capacitacion": entity }})   
     }) 
 }
-export async function completedState(id){
+export async function  StateCapacitacion(id){
     return connection(async function(db){
         return await db.collection("Empleados").updateOne({_id: mongodb.ObjectId(id)},{$set:{"finalizado": true}})   
     }) 
@@ -68,7 +68,7 @@ export async function completedState(id){
 export default {
     viewAllEmpleados,
     insertEmpleado, 
-    deleteById,patch,
+    deleteById,patch,StateCapacitacion,
     updateEmpleadoById,getById,viewEmpleadoByQuery
 }
 

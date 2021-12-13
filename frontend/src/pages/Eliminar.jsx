@@ -28,7 +28,7 @@ export default function AlertDialog(props) {
 
   return (
     <div>
-      <Button startIcon={<DeleteIcon />} variant="outlined" color="error" onClick={handleClickOpen}>
+      <Button startIcon={<DeleteIcon />} variant="outlined" color="error" className='delete' onClick={handleClickOpen}>
         Eliminar
       </Button>
       <Dialog

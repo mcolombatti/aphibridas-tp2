@@ -43,10 +43,15 @@ console.log( props.empleado )
                     <li > Titulo: {item.name}</li>
                     <li > Fecha de inicio de la Capacitación: {item.fechainicio}</li>
                     <li > Duración  de la Capacitación: {item.horas} horas</li>
+                                      
+ 
                     </ul>
        
      </div>
       ))}  
+      {props.empleado.finalizado && props.empleado.finalizado == true && <p>{'Capacitacion Finalizada'}</p>}
+      
+      {!props.empleado.finalizado && props.empleado.capacitacion && <p>{'Capacitacion no Finalizada'}</p>}
      
         </div>
   ) 

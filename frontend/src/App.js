@@ -91,8 +91,8 @@ function App(props) {
       <AppBar position="static">
         <Toolbar style={{"display": "flex",   "flexDirection": "row", "flexWrap": "wrap", "justifyContent": "space-between",   "alignItems": "center"}}>
          
-          <Typography variant="h4" component="div" sx={{ flexGrow: .1 }}>
-            HR Connect
+          <Typography  component="div" sx={{ flexGrow: .1 }}>
+            <h1 variant="h4" id="logo">HR Connect</h1>
           </Typography>
           <div>
             <NoNavAuth>
@@ -107,7 +107,7 @@ function App(props) {
                      <NavRole> <Button color="inherit"><Link to="/crear">Crear</Link></Button></NavRole>
                      <Button  color="inherit"> <Link to="/">Home</Link></Button>
               <NoNavRole><Button  color="inherit"> <Link to="/empleado/capacitaciones">Capacitaciones</Link></Button></NoNavRole>
-            <Button color="inherit"> <Link to="/logout">Logout ({userName })</Link></Button>
+            <Button color="inherit"> <Link to="/logout">Logout</Link></Button>
             
             </NavAuth>
           </div>
