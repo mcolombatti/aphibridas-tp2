@@ -72,6 +72,32 @@ const schemaPatch = yup.object({
  * @param req 
  * @param res 
  */
+ export async function createEmpleados(req, res){
+     schema.validate(req.body) 
+    .then(function (data){
+        empleadosDao.insertEmpleados(req.body)
+        .then(function(result){
+        res.json(result)
+        })
+    .catch(function(err){
+      if (err.error){
+          res.status(400).json({ error: 400, msg: err.msg })
+      }
+      else{
+          res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
+      }
+        })})
+  
+        .catch(function(err){
+            res.status(400).json({ error: 400, msg: err.message  })
+        }) 
+} 
+/**
+ * Busca todos los usuarios de la base de datos 
+ * 
+ * @param req 
+ * @param res 
+ */
  export async function updateEmpleado(req, res){
   empleadosDao.updateEmpleadoById(req.params.id, req.body)
   .then(function(result){
@@ -197,5 +223,5 @@ const schemaPatch = yup.object({
     }) 
   }
 export default { 
-      createEmpleado, updateEmpleado, deleteEmpleado,findAll,getEmpleado,assignCapacitacion,completeCapacitacion,getEmpleadoByQuery
+      createEmpleado, updateEmpleado, deleteEmpleado,createEmpleados,findAll,getEmpleado,assignCapacitacion,completeCapacitacion,getEmpleadoByQuery
 };

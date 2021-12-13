@@ -52,13 +52,18 @@ async function register(user) {
                 
                 rol: user.rol,
                 password: password
-            })
+            }) .catch(function(err){
+               
+                res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
+            
+        }) 
+        
         }
         else{
             throw { error: 400, msg: "El usuario ya existe en nuestros registros."}
         }
     })
-}
+} 
 /**
  * Retorna un array con los documentos del cursor
  * @returns {Promise} 
@@ -72,5 +77,5 @@ async function findAll(){
 export default {
     login,
     register,
-    findAll
+    findAll 
 }

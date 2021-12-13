@@ -2,6 +2,7 @@ import {useParams, Link} from 'react-router-dom'
 import { useEffect, useState  } from 'react';
 import { useEmpleados, EmpleadosProvider } from '../context/Empleados.Context';
  
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 const Empleado = () => {
     const { empleados, useIdFetch } = useEmpleados();
     const { id } = useParams();
@@ -49,7 +50,7 @@ console.log( props.empleado )
        
      </div>
       ))}  
-      {props.empleado.finalizado && props.empleado.finalizado == true && <p>{'Capacitacion Finalizada'}</p>}
+      {props.empleado.finalizado && props.empleado.finalizado == true && <p>{'Capacitacion Finalizada'} <CheckCircleOutlineIcon color="success" /></p> }
       
       {!props.empleado.finalizado && props.empleado.capacitacion && <p>{'Capacitacion no Finalizada'}</p>}
      

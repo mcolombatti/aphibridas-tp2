@@ -19,6 +19,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Empleados from './pages/EmpleadosVistaAdmin'; 
 import DetailsEmpleado from './pages/EmpleadoVistaAdmin'; 
 import Home from './pages/Home'
+import Tabla from './pages/Tabla'
 import { useAuth } from './context/Auth.Context'
 import { style } from '@mui/system';
 

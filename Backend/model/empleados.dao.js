@@ -32,6 +32,16 @@ export async function insertEmpleado(entity) {
 }
 
 
+export async function insertEmpleados(entity) {
+    return connection(
+        async function (db) {
+            await db.collection("Empleados").insertMany(entity )
+            return entity
+        }
+    )
+}
+
+
 
 export async function updateEmpleadoById(id, entity) {
     
@@ -69,7 +79,7 @@ export default {
     viewAllEmpleados,
     insertEmpleado, 
     deleteById,patch,StateCapacitacion,
-    updateEmpleadoById,getById,viewEmpleadoByQuery
+    updateEmpleadoById,getById,viewEmpleadoByQuery,insertEmpleados
 }
 
 

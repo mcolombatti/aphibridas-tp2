@@ -3,8 +3,7 @@
 /* base styles */
 * {
   margin: 0;
-  font-family: "Quicksand";
-  color: #333;
+  font-family: "Quicksand"; 
   list-style: none;
   
   text-decoration: none;

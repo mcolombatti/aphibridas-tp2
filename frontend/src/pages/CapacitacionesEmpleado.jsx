@@ -1,8 +1,8 @@
 import {useParams} from 'react-router-dom'
 import { useEffect, useState } from 'react';
 import { useEmpleado, EmpleadoProvider } from '../context/Empleado.Context';
-import { Button } from '@mui/material';
- 
+import { Button } from '@mui/material'; 
+ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 const Empleado = () => {
     const { empleado, useIdFetch } = useEmpleado();
     
@@ -25,7 +25,7 @@ const Empleado = () => {
        
     return (<div>
                           
-{!empleadoD.finalizado && <p>{'No tenes cargadas capacitaciones aun'}</p>}
+{!empleadoD.capacitacion && <p>{'No tenes cargadas capacitaciones aun'}</p>}
        {empleadoD.capacitacion?.map(item => (<div>
        
          
@@ -40,7 +40,7 @@ const Empleado = () => {
                         
                                
                     
-{empleadoD.finalizado && empleadoD.finalizado == true && <p>{'Capacitacion Finalizada'}</p>}
+{empleadoD.finalizado && empleadoD.finalizado == true && <p>{'Capacitacion Finalizada'} <CheckCircleOutlineIcon color="success" /></p>  }
  
 {!empleadoD.finalizado  && <p>{<Button type="submit" 
           color="secondary" 

@@ -40,7 +40,7 @@ const schemaLogin = yup.object({
     .catch(function(err){
         res.status(400).json({ error: 400, msg: `Error en los datos enviados al registrarse`, err: err.error})
     }) 
- }
+ } 
 
  /**
  * Función para loguearse en la aplicación
@@ -108,6 +108,6 @@ export function obtainLogin(req, res){
 export default {
     register,
     login,
-    findAll,
+    findAll,  
     obtainLogin
 }
