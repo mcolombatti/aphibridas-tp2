@@ -54,7 +54,7 @@ export async function getEmpleadoDetails(id) {
     .then(res => res.json())
 }
 export async function assignCapacitacionEmpleado(id, capacitacion) {
-    return fetch(`${config.api.url}empleados/assignation/${id}`, {
+    return fetch(`${config.api.url}empleados/${id}/capacitaciones`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',

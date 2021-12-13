@@ -6,11 +6,11 @@ const Empleado = () => {
     const { empleado, useIdFetch } = useEmpleado();
     
     const userid = JSON.parse(localStorage.getItem('userid'))
-    console.log(userid)
+    const user = JSON.parse(localStorage.getItem('user'))  
     const { state: empleadoD} = useIdFetch(userid);
     return (
             <div>
-            
+            <h1>Capacitaciones de {user.name} </h1>
               <EmpleadoInfo empleadoD={empleadoD} />
           </div>
     )
@@ -19,7 +19,7 @@ const Empleado = () => {
     const { empleado } = useEmpleado(); 
     return (<div>
        {empleadoD.capacitacion?.map(item => (<div>
-       <h3>Capacitaciones del empleado</h3>
+       
          
             <ul>
                     <li > Titulo: {item.name}</li>
@@ -35,7 +35,7 @@ const Empleado = () => {
 function GetEmpleado(props) {
     return (
     <div>
-          <h2>Ver Capacitaciones del Empleado </h2>
+         
         <EmpleadoProvider>
             <Empleado />
         </EmpleadoProvider>

@@ -16,11 +16,12 @@ export async function login(email, password){
             throw new Error('Las credenciales ingresadas no son válidas')
         }
     })
-} export async function user (email ){
+} export async function user (email  ){
     return fetch( `${config.api.url}empleados/query?email=${email}`, {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'auth-token': `${localStorage.getItem('token')}`
         },
          
     })

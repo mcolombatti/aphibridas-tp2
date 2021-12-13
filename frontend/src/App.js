@@ -20,6 +20,7 @@ import Empleados from './pages/EmpleadosVistaAdmin';
 import DetailsEmpleado from './pages/EmpleadoVistaAdmin'; 
 import Home from './pages/Home'
 import { useAuth } from './context/Auth.Context'
+import { style } from '@mui/system';
 
 function AuthRoute({ children }) {
   const { state } = useAuth() 
@@ -45,13 +46,17 @@ function NavRole({ children }) {
   const { state } = useAuth()
   return (state.user.rol == 'admin') ?   children : null
 }
+function NoNavRole({ children }) {
+  const { state } = useAuth()
+  return (state.user.rol != 'admin') ?   children : null
+}
 
-
+ 
 
 
 function App(props) {
   const auth = useAuth()
-
+  const [userName, setUserName] = useState('');
   let navigate = useNavigate();
   
   useEffect(() => {
@@ -68,10 +73,14 @@ function App(props) {
       const user = JSON.parse(localStorage.getItem('user'))
       auth.dispatch({ type: 'LOGIN', payload: user })
       const userid = JSON.parse(localStorage.getItem('userid'))
-      auth.dispatch({ type: 'USERID', payload: userid })
-    
+      auth.dispatch({ type: 'USERID', payload: userid }) 
+      setUserName(user.name)  
+     console.log(user.name)
+     
     }
   }, []) 
+ 
+       
 
   return (
     <div className="App">
@@ -96,9 +105,10 @@ function App(props) {
             <NavAuth>
                      <NavRole> <Button color="inherit"> <Link to="/empleados">Empleados</Link></Button></NavRole>   
                      <NavRole> <Button color="inherit"><Link to="/crear">Crear</Link></Button></NavRole>
-            <Button color="inherit"> <Link to="/logout">Logout</Link></Button>
+                     <Button  color="inherit"> <Link to="/">Home</Link></Button>
+              <NoNavRole><Button  color="inherit"> <Link to="/empleado/capacitaciones">Capacitaciones</Link></Button></NoNavRole>
+            <Button color="inherit"> <Link to="/logout">Logout ({userName })</Link></Button>
             
-              <Button  color="inherit"> <Link to="/empleado/capacitaciones">Capacitaciones</Link></Button>
             </NavAuth>
           </div>
         </Toolbar>
