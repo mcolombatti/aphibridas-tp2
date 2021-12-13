@@ -14,11 +14,18 @@ export async function getById(id) {
     })
 }
 
+export async function viewEmpleadoByQuery(query) {
+   
+    return connection(async function (db) { 
+        return await db.collection('Empleados').find( query ).toArray()
+    })
+}
+
 
 export async function insertEmpleado(entity) {
     return connection(
         async function (db) {
-            await db.collection("Empleados").insertOne(entity)
+            await db.collection("Empleados").insertOne(entity )
             return entity
         }
     )
@@ -57,7 +64,7 @@ export default {
     viewAllEmpleados,
     insertEmpleado, 
     deleteById,patch,
-    updateEmpleadoById,getById
+    updateEmpleadoById,getById,viewEmpleadoByQuery
 }
 
 

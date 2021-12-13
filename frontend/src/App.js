@@ -67,6 +67,8 @@ function App(props) {
     if (localStorage.getItem('token') && localStorage.getItem('user')){
       const user = JSON.parse(localStorage.getItem('user'))
       auth.dispatch({ type: 'LOGIN', payload: user })
+      const userid = JSON.parse(localStorage.getItem('userid'))
+      auth.dispatch({ type: 'USERID', payload: userid })
     
     }
   }, []) 

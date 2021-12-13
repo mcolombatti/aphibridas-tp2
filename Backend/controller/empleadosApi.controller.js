@@ -11,6 +11,13 @@ const schema = yup.object({
     fechanac: yup.date('la fecha de nacimiento tiene que ser una fecha'),
 
 }).noUnknown()
+const schemaPatch = yup.object({
+    name: yup.string().required('El titulo de la capacitacion es obligatorio').min(3,'el nombre de la capacitacion debe tener al menos tres caracteres'),  
+    fechainicio: yup.date('la fecha de inicio tiene que ser una fecha').required('La Fecha es requerida'),
+  
+    horas: yup.number().typeError('Las horas deben tener un formato valido').required('La duracion de la capacitacion es requerida'),
+
+}).noUnknown()
 
 /**
  * Busca todos los usuarios de la base de datos 
@@ -105,6 +112,29 @@ const schema = yup.object({
  * @param req 
  * @param res 
  */
+ export async function getEmpleadoByQuery(req, res){
+     
+    empleadosDao.viewEmpleadoByQuery(req.query)
+    .then(function(result){
+        
+        console.log(result[0]._id)
+        res.json(result)
+    })
+    .catch(function(err){
+        if (err.error){
+            res.status(400).json({ error: 400, msg: err.msg })
+        }
+        else{
+            res.status(500).json({ error: 500, msg: `O ${err}` })
+        }
+    })
+  }
+/**
+ * Busca todos los usuarios de la base de datos 
+ * 
+ * @param req 
+ * @param res 
+ */
  export async function deleteEmpleado(req, res){
   empleadosDao.deleteById(req.params.id)
   .then(function(result){
@@ -129,6 +159,8 @@ const schema = yup.object({
  * @param res 
  */
  export async function assignCapacitacion(req, res){
+    schemaPatch.validate(req.body) 
+    .then(function (data){
     empleadosDao.patch(req.params.id, req.body)
     .then(function(result){
         res.json(result)
@@ -140,8 +172,12 @@ const schema = yup.object({
         else{
             res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
         }
-    })
+    })})
+    
+    .catch(function(err){
+        res.status(400).json({ error: 400, msg: err.message  })
+    }) 
   }
 export default { 
-      createEmpleado, updateEmpleado, deleteEmpleado,findAll,getEmpleado,assignCapacitacion
+      createEmpleado, updateEmpleado, deleteEmpleado,findAll,getEmpleado,assignCapacitacion,getEmpleadoByQuery
 };

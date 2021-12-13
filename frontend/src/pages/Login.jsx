@@ -14,8 +14,19 @@ function Login({ onLogin }) {
     function onSubmit(event) {
         event.preventDefault()
 
-        API.login(email, password)
+        API.user(email )
         .then(function(data) {
+            console.log(data[0]._id)
+            const userId = data[0]._id
+            localStorage.setItem('userid', JSON.stringify(userId)) 
+            dispatch({ type: 'USERID', payload: data.userid })
+        })
+        .catch(function(error){
+            alert(JSON.stringify(error)) 
+            
+        })
+        API.login(email, password)
+         .then(function(data) {
             localStorage.setItem('token', data.token)
             localStorage.setItem('user', JSON.stringify(data.user)) 
             dispatch({ type: 'LOGIN', payload: data.user })

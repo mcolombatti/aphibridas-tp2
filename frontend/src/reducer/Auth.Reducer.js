@@ -7,6 +7,11 @@ export function AuthReducer(state, action) {
                 isAuthenticated: true,
                 user: action.payload
             } 
+    case 'USERID':
+            return {
+                ...state, 
+                userid: action.payload
+            } 
     
         case 'LOGOUT':
             return {

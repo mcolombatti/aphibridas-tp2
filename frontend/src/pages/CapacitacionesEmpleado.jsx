@@ -4,8 +4,10 @@ import { useEmpleado, EmpleadoProvider } from '../context/Empleado.Context';
  
 const Empleado = () => {
     const { empleado, useIdFetch } = useEmpleado();
-    ;
-    const { state: empleadoD} = useIdFetch('61b6258a68333ffbdbcaa830');
+    
+    const userid = JSON.parse(localStorage.getItem('userid'))
+    console.log(userid)
+    const { state: empleadoD} = useIdFetch(userid);
     return (
             <div>
             
