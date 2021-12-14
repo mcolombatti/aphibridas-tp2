@@ -115,7 +115,7 @@ export async function completarCapacitacion (  id ){
     })
 } 
 export async function editEmpleado (  id, empleado ){
-    return fetch( `${config.api.url}empleados/${id}/edit`, {
+    return fetch( `${config.api.url}empleados/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',

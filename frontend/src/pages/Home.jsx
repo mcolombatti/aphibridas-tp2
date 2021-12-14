@@ -1,6 +1,6 @@
  
 import {useState, useEffect } from 'react'
-
+import {   Link} from 'react-router-dom'
 import { useAuth } from '../context/Auth.Context'
 function Home(props){ 
     
@@ -22,6 +22,7 @@ function Home(props){
 
             <p>El portal HR Connect vas a poder encontrar toda la información que necesitás de tu trabajo.</p>
         <p>Vas a poder acceder a tus capacitaciones, beneficios y mucho más.</p>
+        
         </div>
     )
 }

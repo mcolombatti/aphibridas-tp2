@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
+import {   Link} from 'react-router-dom'
 import { FormGroup, Container, Box } from '@mui/material'
 import { useAuth } from '../context/Auth.Context'
 
@@ -26,7 +27,7 @@ function Register({ onRegister }) {
     }
     return (
         <Container className="register" maxWidth="sm">
-            <Box>
+            <Box><h1>Registrarse</h1>
                 <FormGroup>
                     <TextField label="E-Mail" value={email} onChange={(event) => { setEmail(event.target.value) }} />
                 </FormGroup>
@@ -36,8 +37,12 @@ function Register({ onRegister }) {
                     <TextField label="Nombre Usuario" type="text" value={user} onChange={(event) => { setUser(event.target.value) }} />
                 </FormGroup>
 
-                <Button variant="outlined" onClick={(event) => onSubmit(event)}>Acceder</Button>
-            </Box>
+                <Button variant="outlined" onClick={(event) => onSubmit(event)}>Registrarse</Button>
+
+             
+            </Box>   <Link  className= "btn-detail" className= "btn-detail"  style={{"marginTop": "2em" }} 
+              to={`/login`} > ¿Ya tenes cuenta? Haz click aqui para iniciar sesion   </Link>
+           
         </Container>
     )
 }

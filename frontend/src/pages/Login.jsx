@@ -4,6 +4,7 @@ import Button from '@mui/material/Button'
 import { FormGroup, Container, Box } from '@mui/material'
 import { useAuth } from '../context/Auth.Context'
 
+import {   Link} from 'react-router-dom'
 import * as API from '../api/api.auth'
 
 function Login({ onLogin }) {
@@ -41,6 +42,7 @@ function Login({ onLogin }) {
     return (
         <Container className="login" maxWidth="sm">
             <Box>
+                <h1>Iniciar Sesion</h1>
                 <FormGroup>
                     <TextField label="E-Mail" value={email} onChange={(event) => { setEmail(event.target.value) }} />
                 </FormGroup>
@@ -50,6 +52,9 @@ function Login({ onLogin }) {
 
                 <Button variant="outlined" onClick={(event) => onSubmit(event)}>Acceder</Button>
             </Box>
+            <Link  className= "btn-detail" className= "btn-detail"  style={{"marginTop": "2em" }} 
+              to={`/registrarse`} > ¿Aun no tenes cuenta? Haz click aqui para registrate  </Link>
+           
         </Container>
     )
 }

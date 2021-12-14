@@ -98,8 +98,7 @@ function App(props) {
             <NoNavAuth>
             <Button  color="inherit"> <Link to="/">Home</Link></Button>
             <Button  color="inherit"> <  Link to="/registrarse">Registrarse</Link></Button>
-            <Button color="inherit"> <Link to="/login">Login</Link></Button>
-            <Button color="inherit"> <Link to="/empleado/detalles">Detalles</Link></Button>
+            <Button color="inherit"> <Link to="/login">Login</Link></Button> 
          
             </NoNavAuth>
             <NavAuth>

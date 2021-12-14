@@ -5,8 +5,7 @@ import { admin_validator } from '../middleware/admin_validator.js'
 const route = express.Router()
 
 route.post('/register', authUserController.register) 
-route.post('/login', authUserController.login)
-route.get('/login', [validator], authUserController.obtainLogin)
+route.post('/login', authUserController.login) 
 
 route.get('/', [admin_validator], authUserController.findAll)
 
