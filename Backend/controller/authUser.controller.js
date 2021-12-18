@@ -105,8 +105,62 @@ export function obtainLogin(req, res){
     res.json(req.user)
 }
 
+/**
+ * Devuelve los datos del usuario autenticado
+ * 
+ * @param req 
+ * @param res 
+ */
+export function forgotPassword(req, res){
+   
+    authenticationDao.resetPass(req.body.email)
+
+    .then(function(data){
+        const token = generate({
+            id: data.id,
+            email: data.email,
+            name: data.name,
+            rol: data.rol
+        })  
+       const link = `http://localhost:9001/user/reset-password/${token}`; 
+  res.send(link);
+    })
+    .catch(function(err){
+        if (err.error){
+            res.status(401).json({error:401, msg: err.msg})
+        }
+        else {
+            res.status(500).json({error:500, msg:`Ocurrio un error ${err}`})
+        }
+    })
+}
+
+/**
+ * Devuelve los datos del usuario autenticado
+ * 
+ * @param req 
+ * @param res 
+ */
+export function resetPassword(req, res){
+   
+    authenticationDao.generatePass(req.body, req.params)
+
+    .then(function(data){
+        res.send(data);
+        console.log(data)
+    })
+    .catch(function(err){
+        if (err.error){
+            res.status(401).json({error:401, msg: err.msg})
+        }
+        else {
+            res.status(500).json({error:500, msg:`Ocurrio un error ${err}`})
+        }
+    })
+}
+
 export default {
-    register,
+    register,forgotPassword,resetPassword,
     login,
     findAll,  
     obtainLogin

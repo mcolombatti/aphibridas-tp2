@@ -9,4 +9,8 @@ route.post('/login', authUserController.login)
 
 route.get('/', [admin_validator], authUserController.findAll)
 
+route.post('/forgot-password',  authUserController.forgotPassword);
+  
+route.post('/reset-password/:token',  authUserController.resetPassword);
+  
 export default route

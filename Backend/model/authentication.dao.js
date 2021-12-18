@@ -74,8 +74,67 @@ async function findAll(){
     })
 }
 
+/**
+ * Retorna un array con los documentos del cursor
+ * @returns {Promise} 
+ */
+async function resetPass(email){
+    return await connection(async function(db){
+        const user = await db.collection('Users').findOne({ email: email})
+         if(user){
+            
+                return {
+                    id: user._id,
+                    name: user.name,
+                    email: user.email,
+                    rol: user.rol
+                }
+             
+        }   
+        else {
+            throw {error: 404, msg: "El email no existe en nuestros registros"}
+        }})
+}
+/**
+ * Retorna un array con los documentos del cursor
+ * @returns {Promise} 
+ */
+async function generatePass(password,token){
+    return connection(async function(db) {
+        const tokenValidate = token
+
+        if (tokenValidate){
+            try {
+                const userData = jwt.verify(tokenValidate, "SECRETO")
+                 
+                const salt = await bcrypt.genSalt(10)
+            const password = await bcrypt.hash(userData.password, salt)
+
+            await db.collection('Users').insertOne({
+                name: user.name,
+                email: user.email,
+                
+                rol: user.rol,
+                password: password
+            }) .catch(function(err){
+               
+                res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
+            
+        }) 
+            } catch (err) {
+                return res.status(400).json({error: 400, msg: 'Token invalido'})
+            }
+        }
+        else {
+            return res.status(400).json({error: 400, msg: 'Token no enviado'})
+        }
+     
+    })
+   
+}
+
 export default {
-    login,
+    login,resetPass,generatePass,
     register,
     findAll 
 }
