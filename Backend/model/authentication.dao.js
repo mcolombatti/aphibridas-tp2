@@ -117,43 +117,38 @@ async function resetPass(email) {
  * Retorna un array con los documentos del cursor
  * @returns {Promise} 
  */
-async function generatePass(user, id) {
+async function locateUser(id) {
     return connection(async function (db) {
-
-
-
-        if (user) {
-            const salt = await bcrypt.genSalt(10)
-            const password = await bcrypt.hash(user.password, salt)
-
-            console.log(password)
-            return await db.collection('Users').updateOne({
-                _id: mongodb.ObjectId(id)
-            }, {
-                $set: {
-                    password: password
-
-                }
-
-            })
-
-        } else {
-            throw {
-                error: 400,
-                msg: "no envio la password."
-            }
-        }
-
-
+        return await db.collection("Users").findOne({ _id: mongodb.ObjectId(id) })
 
     })
 
 }
+async function generatePass(user, id) {
+    return connection(async function (db) {
+
+
+        const salt = await bcrypt.genSalt(10)
+        const password = await bcrypt.hash(user.password, salt)
+
+        return await db.collection('Users').updateOne({
+            _id: mongodb.ObjectId(id)
+        }, {
+            $set: {
+                password: password
+
+            }
+
+        })
+
+    }
+
+    )
+}
 
 export default {
     login,
-    resetPass,
-    generatePass,
+    resetPass, locateUser, generatePass,
     register,
     findAll
 }

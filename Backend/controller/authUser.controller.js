@@ -106,7 +106,7 @@ export function obtainLogin(req, res) {
 }
 
 /**
- * Devuelve los datos del usuario autenticado
+ * Genera un link para resetear el password con el email ingresado por body
  * 
  * @param req 
  * @param res 
@@ -122,7 +122,7 @@ export function forgotPassword(req, res) {
                 name: data.name,
                 rol: data.rol
             })
-            const link = `http://localhost:9001/user/reset-password/${data.id}`;
+            const link = `http://localhost:9001/user/reset-password/${data.id}/${token}`;
             res.send(link);
         })
         .catch(function (err) {
@@ -135,28 +135,32 @@ export function forgotPassword(req, res) {
         })
 }
 
+
+
 /**
- * Devuelve los datos del usuario autenticado
+ * Resetea el password del usuario con el nuevo password enviado por body. 
+ * Valida previo al reset que el token enviado por url sea igual al que surge 
+ * de generarlo con la informacion del usuario que hace la peticion
  * 
  * @param req 
  * @param res 
  */
 export function resetPassword(req, res) {
-
-    authenticationDao.generatePass(req.body, req.params)
-
-        .then(function () {
-            res.json({ msg: "password modificado satisfactoriamente" })
-        })
-        .catch(function (err) {
-            if (err.error) {
-                res.status(400).json({ error: 400, msg: err.msg })
-            }
-            else {
-                res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
-            }
-        })
-}
+      
+            authenticationDao.generatePass(req.body, req.params.id)
+                .then(function (result) {
+                    res.json(result)
+                })
+                .catch(function (err) {
+                    if (err.error) {
+                        res.status(400).json({ error: 400, msg: err.msg })
+                    }
+                    else {
+                        res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
+                    }
+                })
+        }
+        
 
 export default {
     register, forgotPassword, resetPassword,

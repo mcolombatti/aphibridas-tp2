@@ -8,23 +8,23 @@ import jwt from 'jsonwebtoken'
  * @param next 
  * @returns 
  */
-export function validator(req, res, next){
-    const token = req.header('auth-token')
-
-    if (token){
+export function validator(req, res, next) {
+    const token = req.params.token
+    console.log(token)
+    if (token) {
         try {
             const userData = jwt.verify(token, "SECRETO")
             req.user = userData
-            next()    
+            next()
         } catch (err) {
-            return res.status(400).json({error: 400, msg: 'Token invalido'})
+            return res.status(400).json({ error: 400, msg: 'Token invalido' })
         }
     }
     else {
-        return res.status(400).json({error: 400, msg: 'Token no enviado'})
+        return res.status(400).json({ error: 400, msg: 'Token no enviado' })
     }
 }
-export function generate(data){
+export function generate(data) {
     return jwt.sign(data, "SECRETO")
 }
 

@@ -11,6 +11,6 @@ route.get('/', [admin_validator], authUserController.findAll)
 
 route.post('/forgot-password', authUserController.forgotPassword);
 
-route.post('/reset-password/:id', authUserController.resetPassword);
+route.post('/reset-password/:id/:token', [validator], authUserController.resetPassword);
 
 export default route
