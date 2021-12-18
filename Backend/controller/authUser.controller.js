@@ -21,57 +21,57 @@ const schemaLogin = yup.object({
  * @param res 
  */
 
- export function register(req, res) {
-    schema.validate(req.body) 
-    .then(function (data){
-        authenticationDao.register(data)
-        .then(function(){
-            res.json({ msg: "Usuario registrado satisfactoriamente"})
+export function register(req, res) {
+    schema.validate(req.body)
+        .then(function (data) {
+            authenticationDao.register(data)
+                .then(function () {
+                    res.json({ msg: "Usuario registrado satisfactoriamente" })
+                })
+                .catch(function (err) {
+                    if (err.error) {
+                        res.status(400).json({ error: 400, msg: err.msg })
+                    }
+                    else {
+                        res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
+                    }
+                })
         })
-        .catch(function (err){
-            if (err.error){
-                res.status(400).json({ error: 400, msg: err.msg})
-            }
-            else {
-                res.status(500).json({error:500, msg: `Ocurrió un error inesperado ${err}`})
-            }
+        .catch(function (err) {
+            res.status(400).json({ error: 400, msg: `Error en los datos enviados al registrarse`, err: err.error })
         })
-    })
-    .catch(function(err){
-        res.status(400).json({ error: 400, msg: `Error en los datos enviados al registrarse`, err: err.error})
-    }) 
- } 
+}
 
- /**
- * Función para loguearse en la aplicación
- * 
- * @param req 
- * @param res 
- */
+/**
+* Función para loguearse en la aplicación
+* 
+* @param req 
+* @param res 
+*/
 
-export function login(req, res){
-     
-    
+export function login(req, res) {
+
+
     authenticationDao.login(req.body.email, req.body.password)
 
-    .then(function(data){
-        const token = generate({
-            id: data.id,
-            email: data.email,
-            name: data.name,
-            rol: data.rol
+        .then(function (data) {
+            const token = generate({
+                id: data.id,
+                email: data.email,
+                name: data.name,
+                rol: data.rol
+            })
+            res.header('auth-token', token).json({ user: data, token: token })
         })
-        res.header('auth-token', token).json({user:data, token: token})
-    })
-    .catch(function(err){
-        if (err.error){
-            res.status(401).json({error:401, msg: err.msg})
-        }
-        else {
-            res.status(500).json({error:500, msg:`Ocurrio un error ${err}`})
-        }
-    })
- 
+        .catch(function (err) {
+            if (err.error) {
+                res.status(401).json({ error: 401, msg: err.msg })
+            }
+            else {
+                res.status(500).json({ error: 500, msg: `Ocurrio un error ${err}` })
+            }
+        })
+
 }
 
 /**
@@ -80,19 +80,19 @@ export function login(req, res){
  * @param req 
  * @param res 
  */
-export function findAll(req, res){
+export function findAll(req, res) {
     authenticationDao.findAll()
-    .then(function(result){
-        res.json(result)
-    })
-    .catch(function(err){
-        if (err.error){
-            res.status(400).json({ error: 400, msg: err.msg })
-        }
-        else{
-            res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
-        }
-    })
+        .then(function (result) {
+            res.json(result)
+        })
+        .catch(function (err) {
+            if (err.error) {
+                res.status(400).json({ error: 400, msg: err.msg })
+            }
+            else {
+                res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
+            }
+        })
 }
 
 /**
@@ -101,7 +101,7 @@ export function findAll(req, res){
  * @param req 
  * @param res 
  */
-export function obtainLogin(req, res){
+export function obtainLogin(req, res) {
     res.json(req.user)
 }
 
@@ -111,28 +111,28 @@ export function obtainLogin(req, res){
  * @param req 
  * @param res 
  */
-export function forgotPassword(req, res){
-   
+export function forgotPassword(req, res) {
+
     authenticationDao.resetPass(req.body.email)
 
-    .then(function(data){
-        const token = generate({
-            id: data.id,
-            email: data.email,
-            name: data.name,
-            rol: data.rol
-        })  
-       const link = `http://localhost:9001/user/reset-password/${token}`; 
-  res.send(link);
-    })
-    .catch(function(err){
-        if (err.error){
-            res.status(401).json({error:401, msg: err.msg})
-        }
-        else {
-            res.status(500).json({error:500, msg:`Ocurrio un error ${err}`})
-        }
-    })
+        .then(function (data) {
+            const token = generate({
+                id: data.id,
+                email: data.email,
+                name: data.name,
+                rol: data.rol
+            })
+            const link = `http://localhost:9001/user/reset-password/${data.id}`;
+            res.send(link);
+        })
+        .catch(function (err) {
+            if (err.error) {
+                res.status(401).json({ error: 401, msg: err.msg })
+            }
+            else {
+                res.status(500).json({ error: 500, msg: `Ocurrio un error ${err}` })
+            }
+        })
 }
 
 /**
@@ -141,27 +141,26 @@ export function forgotPassword(req, res){
  * @param req 
  * @param res 
  */
-export function resetPassword(req, res){
-   
+export function resetPassword(req, res) {
+
     authenticationDao.generatePass(req.body, req.params)
 
-    .then(function(data){
-        res.send(data);
-        console.log(data)
-    })
-    .catch(function(err){
-        if (err.error){
-            res.status(401).json({error:401, msg: err.msg})
-        }
-        else {
-            res.status(500).json({error:500, msg:`Ocurrio un error ${err}`})
-        }
-    })
+        .then(function () {
+            res.json({ msg: "password modificado satisfactoriamente" })
+        })
+        .catch(function (err) {
+            if (err.error) {
+                res.status(400).json({ error: 400, msg: err.msg })
+            }
+            else {
+                res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
+            }
+        })
 }
 
 export default {
-    register,forgotPassword,resetPassword,
+    register, forgotPassword, resetPassword,
     login,
-    findAll,  
+    findAll,
     obtainLogin
 }
