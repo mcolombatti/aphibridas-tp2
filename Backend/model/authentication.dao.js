@@ -113,17 +113,6 @@ async function resetPass(email) {
         }
     })
 }
-/**
- * Retorna un array con los documentos del cursor
- * @returns {Promise} 
- */
-async function locateUser(id) {
-    return connection(async function (db) {
-        return await db.collection("Users").findOne({ _id: mongodb.ObjectId(id) })
-
-    })
-
-}
 async function generatePass(user, id) {
     return connection(async function (db) {
 
@@ -148,7 +137,7 @@ async function generatePass(user, id) {
 
 export default {
     login,
-    resetPass, locateUser, generatePass,
+    resetPass, generatePass,
     register,
     findAll
 }

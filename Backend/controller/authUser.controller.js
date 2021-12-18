@@ -123,6 +123,7 @@ export function forgotPassword(req, res) {
                 rol: data.rol
             })
             const link = `http://localhost:9001/user/reset-password/${data.id}/${token}`;
+            console.log(link)
             res.send(link);
         })
         .catch(function (err) {
@@ -146,21 +147,21 @@ export function forgotPassword(req, res) {
  * @param res 
  */
 export function resetPassword(req, res) {
-      
-            authenticationDao.generatePass(req.body, req.params.id)
-                .then(function (result) {
-                    res.json(result)
-                })
-                .catch(function (err) {
-                    if (err.error) {
-                        res.status(400).json({ error: 400, msg: err.msg })
-                    }
-                    else {
-                        res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
-                    }
-                })
-        }
-        
+
+    authenticationDao.generatePass(req.body, req.params.id)
+        .then(function (result) {
+            res.json(result)
+        })
+        .catch(function (err) {
+            if (err.error) {
+                res.status(400).json({ error: 400, msg: err.msg })
+            }
+            else {
+                res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
+            }
+        })
+}
+
 
 export default {
     register, forgotPassword, resetPassword,
