@@ -3,7 +3,7 @@ import { connection } from './connection.js'
 
 export async function viewAllEmpleados() {
     return connection(
-        async function (db)  {
+        async function (db) {
             return await db.collection('Empleados').find({}).toArray()
         }
     )
@@ -15,9 +15,9 @@ export async function getById(id) {
 }
 
 export async function viewEmpleadoByQuery(query) {
-   
-    return connection(async function (db) { 
-        return await db.collection('Empleados').find( query ).toArray()
+
+    return connection(async function (db) {
+        return await db.collection('Empleados').find(query).toArray()
     })
 }
 
@@ -25,7 +25,7 @@ export async function viewEmpleadoByQuery(query) {
 export async function insertEmpleado(entity) {
     return connection(
         async function (db) {
-            await db.collection("Empleados").insertOne(entity )
+            await db.collection("Empleados").insertOne(entity)
             return entity
         }
     )
@@ -35,7 +35,7 @@ export async function insertEmpleado(entity) {
 export async function insertEmpleados(entity) {
     return connection(
         async function (db) {
-            await db.collection("Empleados").insertMany(entity )
+            await db.collection("Empleados").insertMany(entity)
             return entity
         }
     )
@@ -44,9 +44,9 @@ export async function insertEmpleados(entity) {
 
 
 export async function updateEmpleadoById(id, entity) {
-    
+
     return connection(async function (db) {
-        return await db.collection("Empleados").replaceOne({_id: mongodb.ObjectId(id)}, entity )  
+        return await db.collection("Empleados").replaceOne({ _id: mongodb.ObjectId(id) }, entity)
     })
 }
 
@@ -59,27 +59,27 @@ export async function updateEmpleadoById(id, entity) {
  * @param id (int)
  */
 
- export async function deleteById(id){
-    return connection(async function(db){
-        return await db.collection("Empleados").deleteOne({_id: mongodb.ObjectId(id)}) // hace un delete del testimonio con el id que le pase por query
-    }) 
-}  
-
-export async function patch(id, entity){
-    return connection(async function(db){
-        return await db.collection("Empleados").updateOne({_id: mongodb.ObjectId(id)},{$push:{"capacitacion": entity }})   
-    }) 
+export async function deleteById(id) {
+    return connection(async function (db) {
+        return await db.collection("Empleados").deleteOne({ _id: mongodb.ObjectId(id) }) // hace un delete del testimonio con el id que le pase por query
+    })
 }
-export async function  StateCapacitacion(id){
-    return connection(async function(db){
-        return await db.collection("Empleados").updateOne({_id: mongodb.ObjectId(id)},{$set:{"finalizado": true}})   
-    }) 
+
+export async function patch(id, entity) {
+    return connection(async function (db) {
+        return await db.collection("Empleados").updateOne({ _id: mongodb.ObjectId(id) }, { $push: { "capacitacion": entity } })
+    })
+}
+export async function StateCapacitacion(id) {
+    return connection(async function (db) {
+        return await db.collection("Empleados").updateOne({ _id: mongodb.ObjectId(id) }, { $set: { "finalizado": true } })
+    })
 }
 export default {
     viewAllEmpleados,
-    insertEmpleado, 
-    deleteById,patch,StateCapacitacion,
-    updateEmpleadoById,getById,viewEmpleadoByQuery,insertEmpleados
+    insertEmpleado,
+    deleteById, patch, StateCapacitacion,
+    updateEmpleadoById, getById, viewEmpleadoByQuery, insertEmpleados
 }
 
 

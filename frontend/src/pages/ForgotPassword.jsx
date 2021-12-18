@@ -9,6 +9,7 @@ import * as API from '../api/api.auth'
 
 function ForgotPassword() {
      const [ email, setEmail ] = useState('')
+     const [ link, setLink ] = useState('')
   
     function onSubmit(event) {
         event.preventDefault()
@@ -16,7 +17,7 @@ function ForgotPassword() {
         
         API.forgotPassword(email)
          .then(function(data) {
-          console.log(data)
+            setLink(data)
         })
         .catch(function(error){
             alert(JSON.stringify(error))
@@ -28,9 +29,11 @@ function ForgotPassword() {
                 <h1>Resetear</h1>
                 <FormGroup>
                     <TextField label="E-Mail" value={email} onChange={(event) => { setEmail(event.target.value) }} />
+                    <p>{link}</p>
                 </FormGroup>
               
                 <Button variant="outlined" onClick={(event) => onSubmit(event)}>Resetear</Button>
+                
             </Box>
            
         </Container>

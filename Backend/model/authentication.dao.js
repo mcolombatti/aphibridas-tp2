@@ -115,21 +115,32 @@ async function resetPass(email) {
 }
 async function generatePass(user, id) {
     return connection(async function (db) {
+        if (user) {
+            if (user.password == user.password2) {
+                const salt = await bcrypt.genSalt(10)
+                const password = await bcrypt.hash(user.password, salt)
 
+                return await db.collection('Users').updateOne({
+                    _id: mongodb.ObjectId(id)
+                }, {
+                    $set: {
+                        password: password
 
-        const salt = await bcrypt.genSalt(10)
-        const password = await bcrypt.hash(user.password, salt)
+                    }
 
-        return await db.collection('Users').updateOne({
-            _id: mongodb.ObjectId(id)
-        }, {
-            $set: {
-                password: password
-
+                })
+            } else {
+                throw {
+                    error: 400,
+                    msg: "los passwords no coinciden"
+                }
             }
-
-        })
-
+        } else {
+            throw {
+                error: 400,
+                msg: "no se envió el password"
+            }
+        }
     }
 
     )
@@ -137,7 +148,8 @@ async function generatePass(user, id) {
 
 export default {
     login,
-    resetPass, generatePass,
+    resetPass,
+    generatePass,
     register,
     findAll
 }

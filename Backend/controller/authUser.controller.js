@@ -122,8 +122,10 @@ export function forgotPassword(req, res) {
                 name: data.name,
                 rol: data.rol
             })
-            const link = `http://localhost:9001/user/reset-password/${data.id}/${token}`;
-            console.log(link)
+            const link = `http://localhost:3000/reset-password/${data.id}/${token}`;
+
+
+
             res.send(link);
         })
         .catch(function (err) {

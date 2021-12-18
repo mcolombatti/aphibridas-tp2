@@ -24,6 +24,8 @@ import Home from './pages/Home'
 import { useAuth } from './context/Auth.Context'
 import { style } from '@mui/system';
 
+import { useParams } from 'react-router-dom'
+
 function AuthRoute({ children }) {
   const { state } = useAuth()
   return state.isAuthenticated ? children : <Navigate to="/login" />
@@ -60,12 +62,12 @@ function App(props) {
   const auth = useAuth()
   const [userName, setUserName] = useState('');
   let navigate = useNavigate();
+  const { param } = useParams("/reset-password/:id/:token");
+
 
   useEffect(() => {
-    if (!auth.state.isAuthenticated) {
-      navigate('/login')
-    }
-    else {
+    if (auth.state.isAuthenticated) {
+
       navigate('/')
     }
   }, [auth.state])
@@ -101,7 +103,6 @@ function App(props) {
                   <Button color="inherit"> <Link to="/">Home</Link></Button>
                   <Button color="inherit"> <  Link to="/registrarse">Registrarse</Link></Button>
                   <Button color="inherit"> <Link to="/login">Login</Link></Button>
-                  <Button color="inherit"> <Link to="/forgot-password">Olvide mi contraseña</Link></Button>
 
                 </NoNavAuth>
                 <NavAuth>
@@ -118,8 +119,6 @@ function App(props) {
         </Box>
 
 
-
-
       </div>
       <div className="content">
         <Routes>
@@ -127,7 +126,7 @@ function App(props) {
           <Route path="/login" element={<Login />} />
           <Route path="/registrarse" element={<Register />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/user/reset-password/:id/:token" element={<ResetPassword />} />
+          <Route path="/reset-password/:id/:token" element={<ResetPassword />} />
 
           <Route path="/empleados" element={
             <AuthRoute> <AuthRole><Empleados /></AuthRole></AuthRoute>

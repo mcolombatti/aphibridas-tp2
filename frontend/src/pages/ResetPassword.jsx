@@ -8,15 +8,16 @@ import {useParams, Link} from 'react-router-dom'
 import * as API from '../api/api.auth'
 
 function ResetPassword() {
-     const [ password, setPassword ] = useState('')
+    const [ password, setPassword ] = useState('')
   
-     const { id } = useParams(':id');
-     const { token } = useParams(':token');
+    const [ password2, setPassword2 ] = useState('')
+  
+    const { id, token } = useParams('id, token');
     function onSubmit(event) {
         event.preventDefault()
         
         
-        API.resetPassword(id, token, password)
+        API.resetPassword(id, token, password, password2)
          .then(function(data) {
           console.log(data)
         })
@@ -29,7 +30,10 @@ function ResetPassword() {
             <Box>
                 <h1>Nuevo pass</h1>
                 <FormGroup>
-                    <TextField label="password" value={password} onChange={(event) => { setPassword(event.target.value) }} />
+                    <TextField label="Password" type="password" value={password} onChange={(event) => { setPassword(event.target.value) }} />
+                </FormGroup>
+                <FormGroup>
+                    <TextField label="Repetir password" type="password" value={password2} onChange={(event) => { setPassword2(event.target.value) }} />
                 </FormGroup>
               
                 <Button variant="outlined" onClick={(event) => onSubmit(event)}>Resetear</Button>

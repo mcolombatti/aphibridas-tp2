@@ -8,8 +8,8 @@ import jwt from 'jsonwebtoken'
  * @param next 
  * @returns 
  */
-export function validator(req, res, next) {
-    const token = req.header('auth-token')
+export function validatorTokenResetPass(req, res, next) {
+    const token = req.params.token
 
     if (token) {
         try {
@@ -29,6 +29,6 @@ export function generate(data) {
 }
 
 export default {
-    validator,
+    validatorTokenResetPass,
     generate
 }

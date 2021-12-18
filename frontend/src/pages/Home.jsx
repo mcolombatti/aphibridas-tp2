@@ -11,8 +11,7 @@ function Home(props){
           const user = JSON.parse(localStorage.getItem('user'))
           auth.dispatch({ type: 'LOGIN', payload: user })
           setUserName(user.name)  
-         console.log(user.name)
-         
+           
         }
       }, []) 
  

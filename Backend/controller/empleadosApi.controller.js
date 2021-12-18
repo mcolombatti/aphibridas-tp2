@@ -1,4 +1,4 @@
-import empleadosDao from '../model/empleados.dao.js' 
+import empleadosDao from '../model/empleados.dao.js'
 import * as yup from 'yup'
 
 const schema = yup.object({
@@ -12,9 +12,9 @@ const schema = yup.object({
 
 }).noUnknown()
 const schemaPatch = yup.object({
-    name: yup.string().required('El titulo de la capacitacion es obligatorio').min(3,'el nombre de la capacitacion debe tener al menos tres caracteres'),  
+    name: yup.string().required('El titulo de la capacitacion es obligatorio').min(3, 'el nombre de la capacitacion debe tener al menos tres caracteres'),
     fechainicio: yup.date('la fecha de inicio tiene que ser una fecha').required('La Fecha es requerida'),
-  
+
     horas: yup.number().typeError('Las horas deben tener un formato valido').required('La duracion de la capacitacion es requerida'),
 
 }).noUnknown()
@@ -25,19 +25,19 @@ const schemaPatch = yup.object({
  * @param req 
  * @param res 
  */
- export async function findAll(req, res){
-  empleadosDao.viewAllEmpleados()
-  .then(function(result){
-      res.json(result)
-  })
-  .catch(function(err){
-      if (err.error){
-          res.status(400).json({ error: 400, msg: err.msg })
-      }
-      else{
-          res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
-      }
-  })
+export async function findAll(req, res) {
+    empleadosDao.viewAllEmpleados()
+        .then(function (result) {
+            res.json(result)
+        })
+        .catch(function (err) {
+            if (err.error) {
+                res.status(400).json({ error: 400, msg: err.msg })
+            }
+            else {
+                res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
+            }
+        })
 }
 
 /**
@@ -46,71 +46,26 @@ const schemaPatch = yup.object({
  * @param req 
  * @param res 
  */
- export async function createEmpleado(req, res){
-     schema.validate(req.body) 
-    .then(function (data){
-        empleadosDao.insertEmpleado(req.body)
-        .then(function(result){
-        res.json(result)
+export async function createEmpleado(req, res) {
+    schema.validate(req.body)
+        .then(function (data) {
+            empleadosDao.insertEmpleado(req.body)
+                .then(function (result) {
+                    res.json(result)
+                })
+                .catch(function (err) {
+                    if (err.error) {
+                        res.status(400).json({ error: 400, msg: err.msg })
+                    }
+                    else {
+                        res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
+                    }
+                })
         })
-    .catch(function(err){
-      if (err.error){
-          res.status(400).json({ error: 400, msg: err.msg })
-      }
-      else{
-          res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
-      }
-        })})
-  
-        .catch(function(err){
-            res.status(400).json({ error: 400, msg: err.message  })
-        }) 
-} 
-/**
- * Busca todos los usuarios de la base de datos 
- * 
- * @param req 
- * @param res 
- */
- export async function createEmpleados(req, res){
-     schema.validate(req.body) 
-    .then(function (data){
-        empleadosDao.insertEmpleados(req.body)
-        .then(function(result){
-        res.json(result)
+
+        .catch(function (err) {
+            res.status(400).json({ error: 400, msg: err.message })
         })
-    .catch(function(err){
-      if (err.error){
-          res.status(400).json({ error: 400, msg: err.msg })
-      }
-      else{
-          res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
-      }
-        })})
-  
-        .catch(function(err){
-            res.status(400).json({ error: 400, msg: err.message  })
-        }) 
-} 
-/**
- * Busca todos los usuarios de la base de datos 
- * 
- * @param req 
- * @param res 
- */
- export async function updateEmpleado(req, res){
-  empleadosDao.updateEmpleadoById(req.params.id, req.body)
-  .then(function(result){
-      res.json(result)
-  })
-  .catch(function(err){
-      if (err.error){
-          res.status(400).json({ error: 400, msg: err.msg })
-      }
-      else{
-          res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
-      }
-  })
 }
 /**
  * Busca todos los usuarios de la base de datos 
@@ -118,19 +73,26 @@ const schemaPatch = yup.object({
  * @param req 
  * @param res 
  */
- export async function getEmpleado(req, res){
-  empleadosDao.getById(req.params.id,)
-  .then(function(result){
-      res.json(result)
-  })
-  .catch(function(err){
-      if (err.error){
-          res.status(400).json({ error: 400, msg: err.msg })
-      }
-      else{
-          res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
-      }
-  })
+export async function createEmpleados(req, res) {
+    schema.validate(req.body)
+        .then(function (data) {
+            empleadosDao.insertEmpleados(req.body)
+                .then(function (result) {
+                    res.json(result)
+                })
+                .catch(function (err) {
+                    if (err.error) {
+                        res.status(400).json({ error: 400, msg: err.msg })
+                    }
+                    else {
+                        res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
+                    }
+                })
+        })
+
+        .catch(function (err) {
+            res.status(400).json({ error: 400, msg: err.message })
+        })
 }
 /**
  * Busca todos los usuarios de la base de datos 
@@ -138,90 +100,130 @@ const schemaPatch = yup.object({
  * @param req 
  * @param res 
  */
- export async function getEmpleadoByQuery(req, res){
-     
+export async function updateEmpleado(req, res) {
+    empleadosDao.updateEmpleadoById(req.params.id, req.body)
+        .then(function (result) {
+            res.json(result)
+        })
+        .catch(function (err) {
+            if (err.error) {
+                res.status(400).json({ error: 400, msg: err.msg })
+            }
+            else {
+                res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
+            }
+        })
+}
+/**
+ * Busca todos los usuarios de la base de datos 
+ * 
+ * @param req 
+ * @param res 
+ */
+export async function getEmpleado(req, res) {
+    empleadosDao.getById(req.params.id,)
+        .then(function (result) {
+            res.json(result)
+        })
+        .catch(function (err) {
+            if (err.error) {
+                res.status(400).json({ error: 400, msg: err.msg })
+            }
+            else {
+                res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
+            }
+        })
+}
+/**
+ * Busca todos los usuarios de la base de datos 
+ * 
+ * @param req 
+ * @param res 
+ */
+export async function getEmpleadoByQuery(req, res) {
+
     empleadosDao.viewEmpleadoByQuery(req.query)
-    .then(function(result){
-        
-        console.log(result[0]._id)
-        res.json(result)
-    })
-    .catch(function(err){
-        if (err.error){
-            res.status(400).json({ error: 400, msg: err.msg })
-        }
-        else{
-            res.status(500).json({ error: 500, msg: `O ${err}` })
-        }
-    })
-  }
+        .then(function (result) {
+
+            res.json(result)
+        })
+        .catch(function (err) {
+            if (err.error) {
+                res.status(400).json({ error: 400, msg: err.msg })
+            }
+            else {
+                res.status(500).json({ error: 500, msg: `O ${err}` })
+            }
+        })
+}
 /**
  * Busca todos los usuarios de la base de datos 
  * 
  * @param req 
  * @param res 
  */
- export async function deleteEmpleado(req, res){
-  empleadosDao.deleteById(req.params.id)
-  .then(function(result){
-      res.json(result)
-  })
-  .catch(function(err){
-      if (err.error){
-          res.status(400).json({ error: 400, msg: err.msg })
-      }
-      else{
-          res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
-      }
-  })
+export async function deleteEmpleado(req, res) {
+    empleadosDao.deleteById(req.params.id)
+        .then(function (result) {
+            res.json(result)
+        })
+        .catch(function (err) {
+            if (err.error) {
+                res.status(400).json({ error: 400, msg: err.msg })
+            }
+            else {
+                res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
+            }
+        })
 }
-  
-  
-     /*
- *
- * Busca todos los usuarios de la base de datos 
- * 
- * @param req 
- * @param res 
- */
- export async function assignCapacitacion(req, res){
-    schemaPatch.validate(req.body) 
-    .then(function (data){
-    empleadosDao.patch(req.params.id, req.body)
-    .then(function(result){
-        res.json(result)
-    })
-    .catch(function(err){
-        if (err.error){
-            res.status(400).json({ error: 400, msg: err.msg })
-        }
-        else{
-            res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
-        }
-    })})
-    
-    .catch(function(err){
-        res.status(400).json({ error: 400, msg: err.message  })
-    }) 
-  } 
-  export async function completeCapacitacion(req, res){ 
-        empleadosDao.StateCapacitacion(req.params.id)
-    .then(function(result){
-        res.json(result)
-    })
-    .catch(function(err){
-        if (err.error){
-            res.status(400).json({ error: 400, msg: err.msg })
-        }
-        else{
-            res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
-        }
-    }) 
-    
-    .catch(function(err){
-        res.status(400).json({ error: 400, msg: err.message  })
-    }) 
-  }
-export default { 
-      createEmpleado, updateEmpleado, deleteEmpleado,createEmpleados,findAll,getEmpleado,assignCapacitacion,completeCapacitacion,getEmpleadoByQuery
+
+
+/*
+*
+* Busca todos los usuarios de la base de datos 
+* 
+* @param req 
+* @param res 
+*/
+export async function assignCapacitacion(req, res) {
+    schemaPatch.validate(req.body)
+        .then(function (data) {
+            empleadosDao.patch(req.params.id, req.body)
+                .then(function (result) {
+                    res.json(result)
+                })
+                .catch(function (err) {
+                    if (err.error) {
+                        res.status(400).json({ error: 400, msg: err.msg })
+                    }
+                    else {
+                        res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
+                    }
+                })
+        })
+
+        .catch(function (err) {
+            res.status(400).json({ error: 400, msg: err.message })
+        })
+}
+export async function completeCapacitacion(req, res) {
+    empleadosDao.StateCapacitacion(req.params.id)
+        .then(function (result) {
+            res.json(result)
+        })
+        .catch(function (err) {
+            if (err.error) {
+                res.status(400).json({ error: 400, msg: err.msg })
+            }
+            else {
+                res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
+            }
+        })
+
+        .catch(function (err) {
+            res.status(400).json({ error: 400, msg: err.message })
+        })
+}
+export default {
+    createEmpleado, updateEmpleado, deleteEmpleado, createEmpleados, findAll, getEmpleado, assignCapacitacion, completeCapacitacion, getEmpleadoByQuery
 };
