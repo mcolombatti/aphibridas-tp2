@@ -37,10 +37,10 @@ function Register({ onRegister }) {
                     <TextField label="Nombre Usuario" type="text" value={user} onChange={(event) => { setUser(event.target.value) }} />
                 </FormGroup>
 
-                <Button variant="outlined" onClick={(event) => onSubmit(event)}>Registrarse</Button>
+                <Button variant="outlined" className= "btn-detail"  onClick={(event) => onSubmit(event)}>Registrarse</Button>
 
              
-            </Box>   <Link  className= "btn-detail" className= "btn-detail"  style={{"marginTop": "2em" }} 
+            </Box>   <Link  className= "btn-cuenta"  style={{"marginTop": "2em" }} 
               to={`/login`} > ¿Ya tenes cuenta? Haz click aqui para iniciar sesion   </Link>
            
         </Container>

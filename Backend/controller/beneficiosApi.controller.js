@@ -1,9 +1,10 @@
 import beneficiosDao from '../model/beneficios.dao.js'
+import * as yup from 'yup'
 
 const schema = yup.object({
     titulo: yup.string().required("El titulo es obligatorio").min(3, 'El titulo tiene que tener al menos 3 caracteres').max(70, 'el titulo no puede superar los 70 caracteres'),
-    descripcion: yup.string().required("la descripcion es obligatorio").min(3, 'El titulo tiene que tener al menos 3 caracteres').max(150, 'la descripcion no puede superar los 15 caracteres'),
-    categoria: yup.string().required("Es obligatorio ingresar un email "),
+    descripcion: yup.string().required("la descripcion es obligatorio").min(3, 'El titulo tiene que tener al menos 3 caracteres').max(150, 'la descripcion no puede superar los 150 caracteres'),
+    categoria: yup.string().required("Es obligatorio ingresar una categoria ").min(3, 'La categoría tiene que tener al menos 3 caracteres').max(75, 'La categoría no puede superar los 75 caracteres'),
     fechavenc: yup.date('la fecha de nacimiento tiene que ser una fecha'),
 
 

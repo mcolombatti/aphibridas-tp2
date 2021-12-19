@@ -50,11 +50,11 @@ function Login({ onLogin }) {
                     <TextField label="Password" type="password" value={password} onChange={(event) => { setPassword(event.target.value) }} />
                 </FormGroup>
 
-                <Button variant="outlined" onClick={(event) => onSubmit(event)}>Acceder</Button>
+                <Button variant="outlined"className= "btn-detail" onClick={(event) => onSubmit(event)}>Acceder</Button>
             </Box>
-            <Link  className= "btn-detail" className= "btn-detail"  style={{"marginTop": "2em" }} 
+            <Link  className= "btn-cuenta" style={{"marginTop": "2em" }} 
               to={`/registrarse`} > ¿Aun no tenes cuenta? Haz click aqui para registrate  </Link>
-             <Link  className= "btn-detail" className= "btn-detail"  style={{"marginTop": "2em" }} 
+             <Link  className= "btn-cuenta"  style={{"marginTop": "2em" }} 
               to={`/forgot-password`} > Olvide mi contraseña </Link>
             
 
