@@ -1,0 +1,107 @@
+import { useState,Fragment, useContext, useEffect  } from 'react'; 
+import { useBeneficios, BeneficiosProvider } from '../context/Beneficios.Context'; 
+import { Link} from 'react-router-dom'
+
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+
+import AddIcon from '@mui/icons-material/Add';
+import IconButton from '@mui/material/IconButton';
+
+export const BeneficiosListItem = (props) => {
+  const { beneficio, remove} = useBeneficios();  
+ 
+  const handleRemove = ( ) => { 
+    remove(props.beneficio._id)
+};
+  return (
+    <div>  
+        <TableRow
+              key={props.beneficio._id}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              <TableCell component="th" scope="row">
+              {props.beneficio._id}
+              </TableCell>
+              <TableCell component="th" scope="row">
+              {props.beneficio.categoria}
+              </TableCell>
+              <TableCell component="th" scope="row">
+              {props.beneficio.titulo}
+              </TableCell>
+              <button onClick={()=>handleRemove(props.beneficio._id)}>Eliminar</button>
+             {/*} {
+              <TableCell component="th" scope="row">
+              <Link className= "btn-detail" beneficio={beneficio} style={{"marginTop": "2em" }} to={`/beneficios/${beneficio._id}`} >Ver detalles</Link>
+              </TableCell>  <TableCell component="th" scope="row">
+              <Link  className= "btn-detail" className= "btn-detail"  style={{"marginTop": "2em" }} 
+              to={`/beneficios/${beneficio._id}/edit`} >   Editar   </Link>
+              </TableCell>
+              */}
+               </TableRow>
+    </div>
+  )
+}
+export const BeneficiosList = (props) =>  {
+    const { beneficios, fetchAll} = useBeneficios(); 
+  useEffect(() => {
+    
+    fetchAll() 
+     
+ }
+ 
+    
+   , []);
+   
+   
+
+     return (
+          
+           <div>  
+             <div id="icon-add-container">
+    <IconButton color="success" size="large" aria-label="add">
+      <Link to={`/crear`}>
+      <AddIcon id="btn-add" />
+      </Link>
+    </IconButton>
+          </div>
+            <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Id</TableCell>
+            <TableCell align="right">Titulo</TableCell> 
+          </TableRow>
+        </TableHead>
+        <TableBody>
+        
+          {beneficios?.map(beneficio => (
+             <BeneficiosListItem key={beneficio._id} beneficio={beneficio} />
+          
+          ))}
+        </TableBody>
+      </Table>
+            </TableContainer>
+          
+        </div>
+         
+     )
+}
+ 
+
+function BeneficiosPage(props) {
+    return (
+        <div>
+            <h1>Beneficios</h1>
+            <BeneficiosProvider >
+                <BeneficiosList /> 
+            </BeneficiosProvider>
+        </div>
+    )
+}
+export default BeneficiosPage;
