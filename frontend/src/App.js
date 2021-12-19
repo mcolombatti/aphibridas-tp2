@@ -20,6 +20,7 @@ import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 import Empleados from './pages/EmpleadosVistaAdmin';
 import DetailsEmpleado from './pages/EmpleadoVistaAdmin';
+import Beneficios from './pages/BeneficiosVistaEmpleado'
 import Home from './pages/Home'
 import { useAuth } from './context/Auth.Context'
 import { style } from '@mui/system';
@@ -110,6 +111,7 @@ function App(props) {
                   <NavRole> <Button color="inherit"><Link to="/crear">Crear</Link></Button></NavRole>
                   <Button color="inherit"> <Link to="/">Home</Link></Button>
                   <NoNavRole><Button color="inherit"> <Link to="/empleado/capacitaciones">Capacitaciones</Link></Button></NoNavRole>
+                  <NoNavRole><Button color="inherit"> <Link to="/beneficios">Beneficios</Link></Button></NoNavRole>
                   <Button color="inherit"> <Link to="/logout">Logout</Link></Button>
 
                 </NavAuth>
@@ -134,6 +136,7 @@ function App(props) {
           <Route path="/crear" element={
             <AuthRoute><Crear /></AuthRoute>
           } />
+          <Route path="/beneficios" element={<AuthRoute><Beneficios /></AuthRoute>} />
           <Route path="/empleados/:id" element={<AuthRoute><DetailsEmpleado /></AuthRoute>} />
           <Route path="/empleados/:id/edit" component={EmpleadoEdit} element={<AuthRoute><EmpleadoEdit /></AuthRoute>} />
           <Route path="/empleados/assign/:id" element={<AuthRoute><AssignCapacitacion /></AuthRoute>} />
