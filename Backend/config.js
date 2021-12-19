@@ -12,6 +12,6 @@ export default {
     },
     auth: {
         user: process.env.EMAIL_USERNAME || 'maximiliano.colombat@davinci.edu.ar',
-        pass: process.env.PASSWORD || 'rivercapo92'
+        pass: process.env.PASSWORD || 'Olivia92'
     }
 }

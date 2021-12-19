@@ -5,6 +5,33 @@ import {
 import config from '../config.js'
 import authenticationDao from "../model/authentication.dao.js"
 import nodemailer from 'nodemailer'
+import hbs from 'nodemailer-express-handlebars'
+import path from 'path'
+
+
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: `${config.auth.user}`,
+        pass: `${config.auth.pass}`
+    },
+    tls: {
+        rejectUnauthorized: false
+    }
+});
+const handlebarOptions = {
+    viewEngine: {
+        partialsDir: path.resolve('./email-template'),
+        defaultLayout: false,
+    },
+    viewPath: path.resolve('./email-template'),
+};
+
+// use a template file with nodemailer
+transporter.use('compile', hbs(handlebarOptions))
+
+
+
 const schema = yup.object({
     email: yup.string().email().required("Es obligatorio ingresar un correo electrónico para registrarse"),
     password: yup.string().min(8).required("Es obligatorio ingresar un password para registrarse"),
@@ -29,9 +56,37 @@ export function register(req, res) {
         .then(function (data) {
             authenticationDao.register(data)
                 .then(function () {
+
+
                     res.json({
                         msg: "Usuario registrado satisfactoriamente"
                     })
+                    const link = 'http://localhost:3000/login'
+                    const mailConfigurations = {
+                        from: 'maximiliano.colombat@davinci.edu.ar',
+                        to: data.email,
+                        subject: 'Sending Email using Node.js',
+                        text: `Acabas de registrarte con éxito al portal de HR Connect. Haz click en el siguiente enlace para Iniciar sesión con tu usuario y comenzar a utilizar el portal de HR Connect</p>
+                ${link}`,
+                        template: 'bienvenida',
+                        context: {
+                            email: data.email,
+                            link: link,
+                            company: 'HR Connect'
+                        },
+                        attachments: [{
+                            filename: "bienvenida.jpg",
+                            path: "./email-template/images/bienvenida.jpg",
+                            cid: 'bienvenida'
+                        }],
+
+                    };
+
+                    transporter.sendMail(mailConfigurations, function (error, info) {
+                        if (error) throw Error(error);
+                        console.log('Email Sent Successfully');
+                        console.log(info);
+                    });
                 })
                 .catch(function (err) {
                     if (err.error) {
@@ -155,23 +210,24 @@ export function forgotPassword(req, res) {
 
             res.send(link);
 
-            const transporter = nodemailer.createTransport({
-                service: 'gmail',
-                auth: {
-                    user: `${config.auth.user}`,
-                    pass: `${config.auth.pass}`
-                },
-                tls: {
-                    rejectUnauthorized: false
-                }
-            });
 
             const mailConfigurations = {
                 from: 'maximiliano.colombat@davinci.edu.ar',
-                to: 'maxicolombatti@gmail.com',
+                to: data.email,
                 subject: 'Sending Email using Node.js',
-                text: 'Hi! There, You know I am using the NodeJS ' +
-                    'Code along with NodeMailer to send this email.'
+                text: `Al parecer recibimos una solicitud para resetear tu clave. Haz click en el siguiente enlace para resetear tu clave  ${link}`,
+                template: 'email',
+                context: {
+                    link: link,
+                    name: data.name,
+                    company: 'HR Connect'
+                },
+                attachments: [{
+                    filename: "email-reset-illustration.jpg",
+                    path: "./email-template/images/email-reset-illustration.jpg",
+                    cid: 'email-reset-illustration'
+                }],
+
             };
 
             transporter.sendMail(mailConfigurations, function (error, info) {

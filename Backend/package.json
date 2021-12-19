@@ -19,6 +19,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.1.4",
     "nodemailer": "^6.7.2",
+    "nodemailer-express-handlebars": "^4.0.0",
     "nodemon": "^2.0.15",
     "socket.io": "^4.4.0",
     "yup": "^0.32.11"
