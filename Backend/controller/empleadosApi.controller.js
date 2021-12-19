@@ -224,6 +224,8 @@ export async function completeCapacitacion(req, res) {
             res.status(400).json({ error: 400, msg: err.message })
         })
 }
+
+
 export default {
     createEmpleado, updateEmpleado, deleteEmpleado, createEmpleados, findAll, getEmpleado, assignCapacitacion, completeCapacitacion, getEmpleadoByQuery
 };

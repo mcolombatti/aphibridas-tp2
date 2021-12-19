@@ -1,7 +1,10 @@
 import * as yup from 'yup'
-import { generate } from '../middleware/validatorToken.js'
+import {
+    generate
+} from '../middleware/validatorToken.js'
+import config from '../config.js'
 import authenticationDao from "../model/authentication.dao.js"
-
+import nodemailer from 'nodemailer'
 const schema = yup.object({
     email: yup.string().email().required("Es obligatorio ingresar un correo electrónico para registrarse"),
     password: yup.string().min(8).required("Es obligatorio ingresar un password para registrarse"),
@@ -26,28 +29,39 @@ export function register(req, res) {
         .then(function (data) {
             authenticationDao.register(data)
                 .then(function () {
-                    res.json({ msg: "Usuario registrado satisfactoriamente" })
+                    res.json({
+                        msg: "Usuario registrado satisfactoriamente"
+                    })
                 })
                 .catch(function (err) {
                     if (err.error) {
-                        res.status(400).json({ error: 400, msg: err.msg })
-                    }
-                    else {
-                        res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
+                        res.status(400).json({
+                            error: 400,
+                            msg: err.msg
+                        })
+                    } else {
+                        res.status(500).json({
+                            error: 500,
+                            msg: `Ocurrió un error inesperado ${err}`
+                        })
                     }
                 })
         })
         .catch(function (err) {
-            res.status(400).json({ error: 400, msg: `Error en los datos enviados al registrarse`, err: err.error })
+            res.status(400).json({
+                error: 400,
+                msg: `Error en los datos enviados al registrarse`,
+                err: err.error
+            })
         })
 }
 
 /**
-* Función para loguearse en la aplicación
-* 
-* @param req 
-* @param res 
-*/
+ * Función para loguearse en la aplicación
+ * 
+ * @param req 
+ * @param res 
+ */
 
 export function login(req, res) {
 
@@ -61,14 +75,22 @@ export function login(req, res) {
                 name: data.name,
                 rol: data.rol
             })
-            res.header('auth-token', token).json({ user: data, token: token })
+            res.header('auth-token', token).json({
+                user: data,
+                token: token
+            })
         })
         .catch(function (err) {
             if (err.error) {
-                res.status(401).json({ error: 401, msg: err.msg })
-            }
-            else {
-                res.status(500).json({ error: 500, msg: `Ocurrio un error ${err}` })
+                res.status(401).json({
+                    error: 401,
+                    msg: err.msg
+                })
+            } else {
+                res.status(500).json({
+                    error: 500,
+                    msg: `Ocurrio un error ${err}`
+                })
             }
         })
 
@@ -87,10 +109,15 @@ export function findAll(req, res) {
         })
         .catch(function (err) {
             if (err.error) {
-                res.status(400).json({ error: 400, msg: err.msg })
-            }
-            else {
-                res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
+                res.status(400).json({
+                    error: 400,
+                    msg: err.msg
+                })
+            } else {
+                res.status(500).json({
+                    error: 500,
+                    msg: `Ocurrió un error inesperado ${err}`
+                })
             }
         })
 }
@@ -127,13 +154,43 @@ export function forgotPassword(req, res) {
 
 
             res.send(link);
+
+            const transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: `${config.auth.user}`,
+                    pass: `${config.auth.pass}`
+                },
+                tls: {
+                    rejectUnauthorized: false
+                }
+            });
+
+            const mailConfigurations = {
+                from: 'maximiliano.colombat@davinci.edu.ar',
+                to: 'maxicolombatti@gmail.com',
+                subject: 'Sending Email using Node.js',
+                text: 'Hi! There, You know I am using the NodeJS ' +
+                    'Code along with NodeMailer to send this email.'
+            };
+
+            transporter.sendMail(mailConfigurations, function (error, info) {
+                if (error) throw Error(error);
+                console.log('Email Sent Successfully');
+                console.log(info);
+            });
         })
         .catch(function (err) {
             if (err.error) {
-                res.status(401).json({ error: 401, msg: err.msg })
-            }
-            else {
-                res.status(500).json({ error: 500, msg: `Ocurrio un error ${err}` })
+                res.status(401).json({
+                    error: 401,
+                    msg: err.msg
+                })
+            } else {
+                res.status(500).json({
+                    error: 500,
+                    msg: `Ocurrio un error ${err}`
+                })
             }
         })
 }
@@ -156,17 +213,24 @@ export function resetPassword(req, res) {
         })
         .catch(function (err) {
             if (err.error) {
-                res.status(400).json({ error: 400, msg: err.msg })
-            }
-            else {
-                res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
+                res.status(400).json({
+                    error: 400,
+                    msg: err.msg
+                })
+            } else {
+                res.status(500).json({
+                    error: 500,
+                    msg: `Ocurrió un error inesperado ${err}`
+                })
             }
         })
 }
 
 
 export default {
-    register, forgotPassword, resetPassword,
+    register,
+    forgotPassword,
+    resetPassword,
     login,
     findAll,
     obtainLogin
