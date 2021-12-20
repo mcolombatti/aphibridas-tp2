@@ -206,6 +206,23 @@ export async function assignCapacitacion(req, res) {
             res.status(400).json({ error: 400, msg: err.message })
         })
 }
+
+export async function addFav(req, res) {
+
+    empleadosDao.addNewFavorite(req.params.id, req.body)
+        .then(function (result) {
+            res.json(result)
+        })
+        .catch(function (err) {
+            if (err.error) {
+                res.status(400).json({ error: 400, msg: err.msg })
+            }
+            else {
+                res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
+            }
+        })
+
+}
 export async function completeCapacitacion(req, res) {
     empleadosDao.StateCapacitacion(req.params.id)
         .then(function (result) {
@@ -227,5 +244,5 @@ export async function completeCapacitacion(req, res) {
 
 
 export default {
-    createEmpleado, updateEmpleado, deleteEmpleado, createEmpleados, findAll, getEmpleado, assignCapacitacion, completeCapacitacion, getEmpleadoByQuery
+    addFav, createEmpleado, updateEmpleado, deleteEmpleado, createEmpleados, findAll, getEmpleado, assignCapacitacion, completeCapacitacion, getEmpleadoByQuery
 };

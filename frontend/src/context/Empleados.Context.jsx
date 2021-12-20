@@ -38,6 +38,12 @@ export function EmpleadosProvider(props) {
             throw new Error('Error al eliminar el empleado');
         });
     } 
+    const agregarFav = async (userId, beneficio) => {
+           
+            
+      return API.agregarBeneficioFavoritos(userId,beneficio)
+       
+  }  
     const create = async (empleado) => {
          
           
@@ -93,7 +99,7 @@ const assign = async (id, capacitacion) => {
    
   }
     return (
-                <EmpleadosContext.Provider value={{ empleados,  edit, setEmpleados, remove, create, useIdFetch, assign}}>
+                <EmpleadosContext.Provider value={{ empleados, agregarFav, edit, setEmpleados, remove, create, useIdFetch, assign}}>
             {props.children}
         </EmpleadosContext.Provider>
     );

@@ -24,6 +24,7 @@ import DetailsEmpleado from './pages/EmpleadoVistaAdmin';
 import Beneficios from './pages/BeneficiosVistaEmpleado'
 import BeneficiosAdmin from './pages/BeneficiosVistaAdmin'
 import Home from './pages/Home'
+import BeneficiosFav from './pages/BeneficiosFav'
 import { useAuth } from './context/Auth.Context'
 import { style } from '@mui/system';
 
@@ -113,6 +114,7 @@ function App(props) {
                   <NavRole> <Button color="inherit"><Link to="/lista-beneficios">Beneficios</Link></Button></NavRole>
                   <Button color="inherit"> <Link to="/">Home</Link></Button>
                   <NoNavRole><Button color="inherit"> <Link to="/empleado/capacitaciones">Capacitaciones</Link></Button></NoNavRole>
+                  <NoNavRole><Button color="inherit"> <Link to="/beneficios/favoritos">Mis favoritos</Link></Button></NoNavRole>
                   <NoNavRole><Button color="inherit"> <Link to="/beneficios">Beneficios</Link></Button></NoNavRole>
                   <Button color="inherit"> <Link to="/logout">Logout</Link></Button>
 
@@ -134,7 +136,8 @@ function App(props) {
 
           <Route path="/empleados" element={
             <AuthRoute> <AuthRole><Empleados /></AuthRole></AuthRoute>
-          } />  <Route path="/lista-beneficios" element={
+          } />
+          <Route path="/lista-beneficios" element={
             <AuthRoute> <AuthRole><BeneficiosAdmin /></AuthRole></AuthRoute>
           } />
           <Route path="/empleados/nuevo" element={
@@ -143,6 +146,7 @@ function App(props) {
             <AuthRoute><CrearBeneficio /></AuthRoute>
           } />
           <Route path="/beneficios" element={<AuthRoute><Beneficios /></AuthRoute>} />
+          <Route path="/beneficios/favoritos" element={<AuthRoute><BeneficiosFav /></AuthRoute>} />
           <Route path="/empleados/:id" element={<AuthRoute><DetailsEmpleado /></AuthRoute>} />
           <Route path="/empleados/:id/edit" component={EmpleadoEdit} element={<AuthRoute><EmpleadoEdit /></AuthRoute>} />
           <Route path="/empleados/assign/:id" element={<AuthRoute><AssignCapacitacion /></AuthRoute>} />

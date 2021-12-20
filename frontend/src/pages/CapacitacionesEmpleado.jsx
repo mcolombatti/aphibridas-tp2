@@ -9,6 +9,7 @@ const Empleado = () => {
     const userid = JSON.parse(localStorage.getItem('userid'))
     const user = JSON.parse(localStorage.getItem('user'))  
     const { state: empleadoD} = useIdFetch(userid);
+  
     return (
             <div>
             <h1>Capacitaciones de {user.name} </h1>
@@ -19,6 +20,7 @@ const Empleado = () => {
   const EmpleadoInfo = ({ empleadoD }) => {
     const { empleado, completar } = useEmpleado(); 
     const userid = JSON.parse(localStorage.getItem('userid'))
+    
     function onSubmit(event) { 
         completar( userid)   
       };

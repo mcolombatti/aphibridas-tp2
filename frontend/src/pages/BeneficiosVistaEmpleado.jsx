@@ -1,5 +1,6 @@
 import { useState,Fragment, useContext, useEffect  } from 'react'; 
 import { useBeneficios, BeneficiosProvider } from '../context/Beneficios.Context'; 
+import { useEmpleados, EmpleadosProvider } from '../context/Empleados.Context'; 
 import { Link} from 'react-router-dom'
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -7,10 +8,17 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import IconButton from '@mui/material/IconButton';
 export const BeneficiosListItem = (props) =>  {
-    const { beneficios, fetchAll} = useBeneficios(); 
-   
+    const { beneficios} = useBeneficios();  
+    const {  agregarFav} = useEmpleados(); 
+    const userid = JSON.parse(localStorage.getItem('userid'))
+    
+    function onSubmit(event) { 
+
+      agregarFav( userid, props.beneficio)   
+      };
      return (
          <li>
            <Card sx={{ maxWidth: 345 }}>
@@ -29,8 +37,12 @@ export const BeneficiosListItem = (props) =>  {
         </Typography>
       </CardContent>
       <CardActions>
-      <Link to={`/beneficios/${props.beneficio._id}`}>   <Button size="small">Leer más</Button>  </Link>
       
+      <IconButton  onClick={(event) => onSubmit(event)} color="success" size="large" aria-label="add">
+      
+      <FavoriteBorderIcon />
+     
+    </IconButton>
       </CardActions>
     </Card> 
          </li>
@@ -62,7 +74,9 @@ function BeneficiosPage(props) {
         <div>
             <h1>Beneficios</h1>
             <BeneficiosProvider >
+            <EmpleadosProvider >
                 <BeneficiosList /> 
+            </EmpleadosProvider>
             </BeneficiosProvider>
         </div>
     )

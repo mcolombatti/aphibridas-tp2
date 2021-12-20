@@ -14,11 +14,11 @@ export function EmpleadoProvider(props) {
 
       const useIdFetch = (Empleadoid) => {
         const [state, setState] = useState({});
-        
+        console.log(Empleadoid)
         useEffect(() => {
           const fetchEmpleado = async () => {
             try {
-             
+               
               const empleado = await API.getEmpleadoDetails(Empleadoid);
             
               setState({

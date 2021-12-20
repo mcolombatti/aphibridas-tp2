@@ -70,12 +70,18 @@ export async function patch(id, entity) {
         return await db.collection("Empleados").updateOne({ _id: mongodb.ObjectId(id) }, { $push: { "capacitacion": entity } })
     })
 }
+export async function addNewFavorite(id, entity) {
+    return connection(async function (db) {
+        return await db.collection("Empleados").updateOne({ _id: mongodb.ObjectId(id) }, { $push: { "favoritos": entity } })
+    })
+}
 export async function StateCapacitacion(id) {
     return connection(async function (db) {
         return await db.collection("Empleados").updateOne({ _id: mongodb.ObjectId(id) }, { $set: { "finalizado": true } })
     })
 }
 export default {
+    addNewFavorite,
     viewAllEmpleados,
     insertEmpleado,
     deleteById, patch, StateCapacitacion,
