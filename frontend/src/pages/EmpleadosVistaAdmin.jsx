@@ -2,7 +2,8 @@ import { useState,Fragment, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useEmpleados, EmpleadosProvider } from '../context/Empleados.Context';
 import Empleado from './EmpleadoVistaAdmin';
-import Eliminar from './Eliminar';
+import EliminarEmpleado from './EliminarEmpleado';
+import CrearEmpleado from './CrearEmpleado';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -20,7 +21,7 @@ return (
 <div>
   <div id="icon-add-container">
     <IconButton color="success" size="large" aria-label="add">
-      <Link to={`/crear`}>
+      <Link to={`/empleados/nuevo`}>
       <AddIcon id="btn-add" />
       </Link>
     </IconButton>
@@ -60,7 +61,7 @@ return (
               to={`/empleados/assign/${empleado._id}`}>Asignar capacitacion</Link>
           </TableCell>
           <TableCell component="th" scope="row">
-            <Eliminar empleado={empleado} />
+            <EliminarEmpleado empleado={empleado} />
           </TableCell>
         </TableRow>
         ))}

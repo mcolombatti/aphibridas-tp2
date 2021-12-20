@@ -5,7 +5,8 @@ import { Routes, Route, Link, Navigate, useNavigate } from 'react-router-dom';
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Logout from './pages/Logout'
-import Crear from './pages/Crear'
+import CrearBeneficio from './pages/CrearBeneficio'
+import CrearEmpleado from './pages/CrearEmpleado'
 import CapacitacionesEmpleado from './pages/CapacitacionesEmpleado'
 import EmpleadoEdit from './pages/EmpleadoEdit'
 import AssignCapacitacion from './pages/AsignarCapacitacion'
@@ -136,8 +137,10 @@ function App(props) {
           } />  <Route path="/lista-beneficios" element={
             <AuthRoute> <AuthRole><BeneficiosAdmin /></AuthRole></AuthRoute>
           } />
-          <Route path="/crear" element={
-            <AuthRoute><Crear /></AuthRoute>
+          <Route path="/empleados/nuevo" element={
+            <AuthRoute><CrearEmpleado /></AuthRoute>
+          } /> <Route path="/beneficios/nuevo" element={
+            <AuthRoute><CrearBeneficio /></AuthRoute>
           } />
           <Route path="/beneficios" element={<AuthRoute><Beneficios /></AuthRoute>} />
           <Route path="/empleados/:id" element={<AuthRoute><DetailsEmpleado /></AuthRoute>} />

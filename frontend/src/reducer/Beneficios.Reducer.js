@@ -4,7 +4,7 @@ export default function BeneficioReducer(state, action) {
         case 'add':
             return [...state, action.payload];
         case 'remove':
-            return state.filter(beneficio => beneficio.id !== action.payload);
+            return state.filter((item) => item.id !== action.payload);
         case 'update':
             return state.map(beneficio => {
                 if (beneficio.id === action.payload.id) {

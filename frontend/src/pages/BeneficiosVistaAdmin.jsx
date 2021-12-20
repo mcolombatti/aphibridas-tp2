@@ -1,7 +1,7 @@
 import { useState,Fragment, useContext, useEffect  } from 'react'; 
 import { useBeneficios, BeneficiosProvider } from '../context/Beneficios.Context'; 
 import { Link} from 'react-router-dom'
-
+import EliminarBeneficio from './EliminarBeneficio';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -13,14 +13,12 @@ import Paper from '@mui/material/Paper';
 import AddIcon from '@mui/icons-material/Add';
 import IconButton from '@mui/material/IconButton';
 
-export const BeneficiosListItem = (props) => {
-  const { beneficio, remove} = useBeneficios();  
- 
-  const handleRemove = ( ) => { 
-    remove(props.beneficio._id)
-};
+export const BeneficiosListItem = (props) => {  
+  const [error, setError] = useState('');
+  
   return (
-    <div>  
+  
+    
         <TableRow
               key={props.beneficio._id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -29,12 +27,15 @@ export const BeneficiosListItem = (props) => {
               {props.beneficio._id}
               </TableCell>
               <TableCell component="th" scope="row">
+              {props.beneficio.titulo}
+              </TableCell> 
+              <TableCell component="th" scope="row">
               {props.beneficio.categoria}
               </TableCell>
+           
               <TableCell component="th" scope="row">
-              {props.beneficio.titulo}
-              </TableCell>
-              <button onClick={()=>handleRemove(props.beneficio._id)}>Eliminar</button>
+                <EliminarBeneficio beneficio={props.beneficio} /> 
+                 </TableCell>
              {/*} {
               <TableCell component="th" scope="row">
               <Link className= "btn-detail" beneficio={beneficio} style={{"marginTop": "2em" }} to={`/beneficios/${beneficio._id}`} >Ver detalles</Link>
@@ -44,7 +45,7 @@ export const BeneficiosListItem = (props) => {
               </TableCell>
               */}
                </TableRow>
-    </div>
+    
   )
 }
 export const BeneficiosList = (props) =>  {
@@ -65,7 +66,7 @@ export const BeneficiosList = (props) =>  {
            <div>  
              <div id="icon-add-container">
     <IconButton color="success" size="large" aria-label="add">
-      <Link to={`/crear`}>
+      <Link to={`/beneficios/nuevo`}>
       <AddIcon id="btn-add" />
       </Link>
     </IconButton>
@@ -76,6 +77,8 @@ export const BeneficiosList = (props) =>  {
           <TableRow>
             <TableCell>Id</TableCell>
             <TableCell align="right">Titulo</TableCell> 
+            <TableCell align="right">Categoria</TableCell> 
+            <TableCell align="right"> </TableCell> 
           </TableRow>
         </TableHead>
         <TableBody>

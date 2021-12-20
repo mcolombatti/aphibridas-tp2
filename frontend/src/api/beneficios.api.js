@@ -26,7 +26,14 @@ export async function deleteBeneficio(id) {
             'auth-token': `${localStorage.getItem('token')}`
         }
     })
-        .then(res => res.json())
+        .then(function (res) {
+            if (res.status === 200) {
+                return res.json()
+            }
+            else {
+                throw new Error('Hubo un error al eliminar')
+            }
+        })
         .catch(function (res, err) {
             if (err.error) {
                 res.status(400).json({ error: 400, msg: `La información enviada no es correcta. No pudimos eliminar el registro ${err}` })
@@ -36,6 +43,28 @@ export async function deleteBeneficio(id) {
             }
         })
 }
+export async function createBeneficio(beneficio) {
+    return fetch(`${config.api.url}beneficios/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'auth-token': `${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify(beneficio)
+    })
+        .then(function (res) {
+            res.json({ msg: "Beneficio registrado satisfactoriamente" })
+        })
+        .catch(function (res, err) {
+            if (err.error) {
+                res.status(400).json({ error: 400, msg: `La información enviada no es correcta. No pudimos crear el registro ${err}` })
+                console.log(err.error)
+            }
+            else {
+                res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
+            }
+        })
+}
 export default {
-    getBeneficios, deleteBeneficio
+    getBeneficios, deleteBeneficio, createBeneficio
 }

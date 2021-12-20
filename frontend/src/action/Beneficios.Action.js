@@ -2,7 +2,7 @@
 export function BeneficioRemove(id) {
     return {
         type: 'remove',
-        payload: id
+        payload: { id }
     };
 }
 
