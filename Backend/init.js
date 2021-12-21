@@ -10,7 +10,24 @@ authenticationDao.register(  {
     .then(() => {
         console.log("Usuario creado")
     })
- 
+    authenticationDao.register(  { 
+      "name": "juan perez",
+      "email": "jperez@email.com",
+      "rol": null,
+      "password": "asdasdasd"
+    }  )
+      .then(() => {
+          console.log("Usuario creado")
+      })
+    authenticationDao.register(  { 
+      "name": "brian lara",
+      "email": "blara@email.com",
+      "rol": null,
+      "password": "asdasdasd"
+    }  )
+      .then(() => {
+          console.log("Usuario creado")
+      })
 empleadosDAO.insertEmpleados([{
 
     "name": "Juan",

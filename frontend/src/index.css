@@ -251,6 +251,14 @@ li {
   background-color: #ffc233 !important
 }
 
+.active {
+ max-width: 10%; 
+}
+#fav-box{    display: flex;
+  justify-content: right;}
+.inactive {
+  max-width: 10%;
+}
 #btn-add {
   font-size: 1.6em !important;
   background-color: #15971b !important;

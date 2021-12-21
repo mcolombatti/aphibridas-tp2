@@ -12,11 +12,19 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import IconButton from '@mui/material/IconButton'; 
 import { ToastContainer, toast } from 'react-toastify';
 
+import ToggleImages from "./ToggleImages";
+import { Box } from '@mui/system';
 export const BeneficiosListItem = (props) =>  {
     const { beneficios} = useBeneficios();  
     const {  agregarFav} = useEmpleados(); 
     const userid = JSON.parse(localStorage.getItem('userid'))
-    
+    const [active, setActive] = useState(false);
+
+  const handleChangeActive = () => {
+    setActive((previousStar) => {
+      return !previousStar;
+    });
+  };
     function onSubmit(event) { 
 
       agregarFav( userid, props.beneficio)   
@@ -40,11 +48,11 @@ export const BeneficiosListItem = (props) =>  {
       </CardContent>
       <CardActions>
       
-      <IconButton  onClick={(event) => onSubmit(event)} color="success" size="large" aria-label="add">
+      <Box  onClick={(event) => onSubmit(event)} color="success" size="large" aria-label="add">
       
-      <FavoriteBorderIcon />
+      <ToggleImages active={active} handleChangeActive={handleChangeActive} />
     
-    </IconButton>
+    </Box>
     <ToastContainer  
 position="top-right"
 autoClose={5000}
