@@ -1,31 +1,45 @@
-import { createContext, useContext, useReducer, useState, useEffect } from "react";
-import API from '../api/beneficios.api' 
- import  BeneficioReducer  from '../reducer/Beneficios.Reducer'
+import { createContext, useContext,   useState, useEffect } from "react";
+import API from '../api/beneficios.api'  
 import {   useNavigate  } from 'react-router-dom'; 
   
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const BeneficiosContext = createContext(); 
  
 export function BeneficiosProvider(props) {
-    const [beneficios, setBeneficios] = useState()
-    const [state, dispatch] = useReducer(BeneficioReducer, []);
+    const [beneficios, setBeneficios] = useState() 
   
  
     let navigate = useNavigate();
     const remove = async (beneficio) => {
       setBeneficios(beneficios.filter(p => p._id !== beneficio._id))
       return API.deleteBeneficio(beneficio._id)
+      .then(()=>{
+
+        toast.success('Se elimino con exito el beneficio')
+      })
       .catch(() => {   
+          
+toast.error('Hubo un problema al eliminar el beneficio')
           throw new Error('Error al eliminar el beneficio');
       });
   } 
   const create = async (beneficio) => {
          
           
-    return API.createBeneficio(beneficio)
-    .then(() => {
-        
-        navigate('/lista-beneficios')
+    return API.createBeneficio(beneficio)  
+    .then(()=>{
+
+        toast.success('Se creo con exito el beneficio') 
+         navigate('/lista-beneficios')
       })
+      .catch(() => {   
+          
+toast.error('Hubo un problema al crear el beneficio')
+          throw new Error('Error al crear el beneficio');
+      });
+      
+      
 }  
     const fetchAll = async () => {
      
@@ -40,7 +54,7 @@ export function BeneficiosProvider(props) {
     }  
  
     return (
-                <BeneficiosContext.Provider value={{ beneficios, create,setBeneficios, fetchAll, dispatch,state, remove }}>
+                <BeneficiosContext.Provider value={{ beneficios, create,setBeneficios, fetchAll,  remove }}>
             {props.children}
         </BeneficiosContext.Provider>
     );

@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import API from '../api/empleado.api' 
  
+import { ToastContainer, toast } from 'react-toastify';
 import {   useNavigate  } from 'react-router-dom';
 
 const EmpleadoContext = createContext(); 
@@ -43,10 +44,15 @@ export function EmpleadoProvider(props) {
          
           
         return API.completarCapacitacion(id )
-        .then(() => {
-                
-          navigate('/')
+        .then(()=>{
+
+          toast.success('¡Capacitacion completada!') 
         })
+        .catch(() => {   
+            
+    toast.error('Hubo un problema al completar la capacitacion ')
+            throw new Error('Error al completar la capacitacion ');
+        });
 }  
        
     return (

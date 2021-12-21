@@ -36,14 +36,7 @@ export const BeneficiosListItem = (props) => {
               <TableCell component="th" scope="row">
                 <EliminarBeneficio beneficio={props.beneficio} /> 
                  </TableCell>
-             {/*} {
-              <TableCell component="th" scope="row">
-              <Link className= "btn-detail" beneficio={beneficio} style={{"marginTop": "2em" }} to={`/beneficios/${beneficio._id}`} >Ver detalles</Link>
-              </TableCell>  <TableCell component="th" scope="row">
-              <Link  className= "btn-detail" className= "btn-detail"  style={{"marginTop": "2em" }} 
-              to={`/beneficios/${beneficio._id}/edit`} >   Editar   </Link>
-              </TableCell>
-              */}
+             
                </TableRow>
     
   )

@@ -18,7 +18,6 @@ p,
 li {
   font-size: 1.3em;
 }
-
 .navbar {
   padding: 20px;
   display: flex;
@@ -247,6 +246,7 @@ li {
   display: flex;
   max-width: 100%;
 }
+#logout{  font-family: "Quicksand";    color: white !important;}
 .css-zcbmsk-MuiButtonBase-root-MuiButton-root {
   background-color: #ffc233 !important
 }

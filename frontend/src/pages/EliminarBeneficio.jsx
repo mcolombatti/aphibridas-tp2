@@ -5,6 +5,8 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useBeneficios, BeneficiosProvider } from '../context/Beneficios.Context';
@@ -31,6 +33,19 @@ export default function AlertDialog(props) {
       <Button startIcon={<DeleteIcon />} variant="outlined" color="error" className='delete' onClick={handleClickOpen}>
         Eliminar
       </Button>
+      <ToastContainer
+position="top-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+/>
+{/* Same as */}
+<ToastContainer />
       <Dialog
         open={open}
         onClose={handleClose}

@@ -4,6 +4,8 @@ import Button from '@mui/material/Button'
 import { FormGroup, Container, Box } from '@mui/material'
 import { useAuth } from '../context/Auth.Context'
 
+import { ToastContainer, toast } from 'react-toastify';
+
 import {   Link} from 'react-router-dom'
 import * as API from '../api/api.auth'
 
@@ -23,7 +25,8 @@ function Login({ onLogin }) {
             dispatch({ type: 'LOGIN', payload: data.user })
         })
         .catch(function(error){
-            alert(JSON.stringify(error))
+            toast.error('Hubo un problema al iniciar sesion. Intente nuevamente')
+            console.error(error)
         })
         console.log(email)
         if(email != 'admin@email.com')
@@ -35,7 +38,7 @@ function Login({ onLogin }) {
             dispatch({ type: 'USERID', payload: data.userid })
         })
         .catch(function(error){
-            alert(JSON.stringify(error)) 
+            console.error(error)
             
         }) }
     }
@@ -51,6 +54,8 @@ function Login({ onLogin }) {
                 </FormGroup>
 
                 <Button variant="outlined"className= "btn-detail" onClick={(event) => onSubmit(event)}>Acceder</Button>
+            
+  <ToastContainer />
             </Box>
             <Link  className= "btn-cuenta" style={{"marginTop": "2em" }} 
               to={`/registrarse`} > ¿Aun no tenes cuenta? Haz click aqui para registrate  </Link>

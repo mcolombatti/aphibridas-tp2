@@ -6,7 +6,6 @@ import { useForm } from "react-hook-form";
 import SendIcon from '@mui/icons-material/Send';
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-
 const schema = yup.object().shape({
   name: yup.string().required('El nombre es obligatorio').min(3,  'El nombre debe tener al menos tres caracteres'), 
   apellido: yup.string().required('El apellido es obligatorio').min(3, 'El apellido debe tener al menos tres caracteres'), 
@@ -105,7 +104,6 @@ return (
           >
           Confirmar
         </Button>
-        
      
       </form>
 </div>

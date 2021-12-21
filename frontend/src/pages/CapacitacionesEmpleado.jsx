@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import { useEmpleado, EmpleadoProvider } from '../context/Empleado.Context';
 import { Button } from '@mui/material'; 
  import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+ import { ToastContainer, toast } from 'react-toastify';
+
 const Empleado = () => {
     const { empleado, useIdFetch } = useEmpleado();
     
@@ -47,7 +49,19 @@ const Empleado = () => {
 {!empleadoD.finalizado  && <p>{<Button type="submit" 
           color="secondary" 
           variant="contained"  onClick={(event) => onSubmit(event)}>Marcar como completada</Button>}</p>}
- 
+ <ToastContainer
+position="top-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+/>
+{/* Same as */}
+<ToastContainer />
      </div>
       ))}
     </div>

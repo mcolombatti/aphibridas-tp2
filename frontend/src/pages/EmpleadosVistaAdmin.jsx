@@ -5,6 +5,8 @@ import Empleado from './EmpleadoVistaAdmin';
 import EliminarEmpleado from './EliminarEmpleado';
 import CrearEmpleado from './CrearEmpleado';
 
+import { ToastContainer, toast } from 'react-toastify';
+
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -69,6 +71,7 @@ return (
     </Table>
   </TableContainer>
 
+  <ToastContainer />
 </div>
 )
 }

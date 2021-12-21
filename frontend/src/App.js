@@ -116,7 +116,7 @@ function App(props) {
                   <NoNavRole><Button color="inherit"> <Link to="/empleado/capacitaciones">Capacitaciones</Link></Button></NoNavRole>
                   <NoNavRole><Button color="inherit"> <Link to="/beneficios/favoritos">Mis favoritos</Link></Button></NoNavRole>
                   <NoNavRole><Button color="inherit"> <Link to="/beneficios">Beneficios</Link></Button></NoNavRole>
-                  <Button color="inherit"> <Link to="/logout">Logout</Link></Button>
+                   <Logout /> 
 
                 </NavAuth>
               </div>
@@ -148,10 +148,9 @@ function App(props) {
           <Route path="/beneficios" element={<AuthRoute><Beneficios /></AuthRoute>} />
           <Route path="/beneficios/favoritos" element={<AuthRoute><BeneficiosFav /></AuthRoute>} />
           <Route path="/empleados/:id" element={<AuthRoute><DetailsEmpleado /></AuthRoute>} />
-          <Route path="/empleados/:id/edit" component={EmpleadoEdit} element={<AuthRoute><EmpleadoEdit /></AuthRoute>} />
+          <Route path="/empleados/:id/edit"   element={<AuthRoute><EmpleadoEdit /></AuthRoute>} />
           <Route path="/empleados/assign/:id" element={<AuthRoute><AssignCapacitacion /></AuthRoute>} />
-          <Route path="/empleado/capacitaciones" element={<AuthRoute><CapacitacionesEmpleado /></AuthRoute>} />
-          <Route path="/logout" element={<Logout />} />
+          <Route path="/empleado/capacitaciones" element={<AuthRoute><CapacitacionesEmpleado /></AuthRoute>} /> 
           <Route path="/404" element={<h1>Sitio no encontrado</h1>} />
           <Route path="*" element={<Navigate to="/404" />} />
         </Routes>

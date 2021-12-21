@@ -9,7 +9,9 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import IconButton from '@mui/material/IconButton';
+import IconButton from '@mui/material/IconButton'; 
+import { ToastContainer, toast } from 'react-toastify';
+
 export const BeneficiosListItem = (props) =>  {
     const { beneficios} = useBeneficios();  
     const {  agregarFav} = useEmpleados(); 
@@ -41,8 +43,19 @@ export const BeneficiosListItem = (props) =>  {
       <IconButton  onClick={(event) => onSubmit(event)} color="success" size="large" aria-label="add">
       
       <FavoriteBorderIcon />
-     
+    
     </IconButton>
+    <ToastContainer  
+position="top-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+/>  
       </CardActions>
     </Card> 
          </li>
