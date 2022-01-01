@@ -73,7 +73,7 @@ return (
              
     <TextField 
           {...register("fechavenc")}
-          
+          type="date"
           id="outlined-required" required
           label="date"onChange={(e)=> setFechavenc(e.target.value)}
           defaultValue={fechavenc}

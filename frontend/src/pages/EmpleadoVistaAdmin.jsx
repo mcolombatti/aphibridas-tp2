@@ -8,9 +8,8 @@ const Empleado = () => {
     const { id } = useParams();
     const { state: empleado} = useIdFetch(id);
     return (
-            <div>
-            
-              <EmpleadoInfo empleado={empleado} />
+          <div>
+            <EmpleadoInfo empleado={empleado} />
           </div>
     )
   }
@@ -19,7 +18,7 @@ const Empleado = () => {
 
     return (<div>
       
-        <h3>Id: {empleado._id}</h3>
+      <h3>Id: {empleado._id}</h3>
       <p>nombre: {empleado.name}</p>
       <p>email: {empleado.email}</p>
       <p>dni: {empleado.dni}</p>
