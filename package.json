@@ -11,6 +11,9 @@
     "init": "node init.js",
     "server": "node main.js"
   },
+  "engines": {
+      "node": "14.17.0"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {

@@ -3,6 +3,7 @@ import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import { FormGroup, Container, Box } from '@mui/material'
   
+import {   Link} from 'react-router-dom'
 import {   useNavigate  } from 'react-router-dom';
 
 import { useAuth } from '../context/Auth.Context'
@@ -20,7 +21,7 @@ function Logout({ onLogout }) {
         }  
     return (
        
-            <Button id="logout" onClick={(event) => onSubmit(event)}>Logout</Button>
+        <Button color="inherit">   <Link to="#" id="logout" onClick={(event) => onSubmit(event)}>Logout</Link></Button>
         
     )
 }
