@@ -252,7 +252,7 @@ header{background-color:  #674EA7 !important;}
 .css-zcbmsk-MuiButtonBase-root-MuiButton-root {
   background-color: #ffc233 !important
 }
-
+a{text-decoration: none;color:inherit}
 .active {
  max-width: 10%; 
 }
