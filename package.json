@@ -3,12 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "type": "module",
-  "main": "index.js", 
-  "engines": { 
-      "node": "14.17.0" 
-   },
+  "main": "index.js",  
   "scripts": {
-    "start": "node backend/main.js",
+    "heroku-postbuild": "cd frontend && npm install --only=dev && npm install && npm run build",
+    "start": "node main.js",
     "dev": "nodemon main.js",
     "init": "node init.js",
     "server": "node main.js"
