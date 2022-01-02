@@ -1,7 +1,7 @@
 import {
     connection
 } from '../model/connection.js'
-import bcrypt from 'bcryptjs'
+import bcrypt from 'bcrypt'
 import mongodb from 'mongodb'
 /**
  * Llama a la conexión con la base de datos para loguear al usuario con las credenciales enviadas por parámetro
